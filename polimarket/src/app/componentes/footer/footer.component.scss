@@ -1,0 +1,22 @@
+.footer{
+  background: #BCDDFE;
+  color:#22262A;
+  margin: 0;
+  padding-right: 5px;
+  .about-company{
+    i{font-size: 25px;}
+    a{
+      color:white;
+      transition: color .2s;
+      &:hover{color:#4180CB}
+    }
+  }
+  .location{
+    i{font-size: 18px;}
+  }
+  .copyright p{border-top:1px solid rgba(255,255,255,.1);}
+}
+@font-face {
+  font-family: Poppins;
+  src: url("../../../assets/fonts/Poppins-Regular.ttf");
+}
