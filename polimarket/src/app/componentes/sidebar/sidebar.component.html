@@ -1,32 +1,24 @@
-<div class="row">
-  <div
-    class="col-2"
-    style="background: #f6f7f8;
-    margin:10px 25px 10px 25px">
-      <ul class="nav " id="menu" >
-        <li class="nav-item">
-          <a href="#" class="nav-link text-truncate" style="color: black;font-family: Poppins">
-            <span class="ms-1 d-none d-sm-inline">Categorías</span>
-          </a>
-        </li>
+<ul class="nav " id="menu" >
+  <li class="nav-item">
+    <a href="#" class="nav-link text-truncate" style="color: black;font-family: Poppins">
+      <span class="ms-1 d-none d-sm-inline">Categorías</span>
+    </a>
+  </li>
 
-        <li class="nav-item w-100 " *ngFor="let categoria of categorias; let i =index">
-          <div class="row justify-content-start">
-            <div class="col-9" style="padding-right: 0">
-              <a href="#" class="nav-link active text-truncate text-left" style="font-weight: bold; font-family: Abril Fatface">
-                <span class="ms-1 d-none d-sm-inline">{{categoria.categoria}}</span>
-              </a>
-            </div>
-            <div class="col-2 " style="padding: 0 10px 0 10px;">
-              <a href="#" class="nav-link cantidad active"
-                 style=" font-weight: bold; font-family: Abril Fatface;padding-left: 0">
-                {{categoria.cantProductos}}
-              </a>
-            </div>
-          </div>
-        </li>
+  <li class="nav-item w-100" *ngFor="let categoria of categorias; let i =index">
+    <div class="row justify-content-start">
+      <div class="col-9" style="padding-right: 0">
+        <a href="#" class="nav-link text-truncate text-left" style="font-weight: bold; font-family: Abril Fatface">
+          <span class="ms-1 d-none d-sm-inline">{{categoria.categoria}}</span>
+        </a>
+      </div>
+      <div class="col-2 " style="padding: 0 10px 0 10px;">
+        <a href="#" class="nav-link cantidad"
+           style=" font-weight: bold; font-family: Abril Fatface;padding-left: 0">
+          {{categoria.cantProductos}}
+        </a>
+      </div>
+    </div>
+  </li>
 
-      </ul>
-  </div>
-
-</div>
+</ul>
