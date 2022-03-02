@@ -13,6 +13,12 @@ export class BaseControlComponent implements OnInit {
   formGroup = new FormGroup({})
 
   @Input()
+  size = "24px"
+
+  @Input()
+  color = "black"
+
+  @Input()
   campos: baseControlInterface[] = [] as baseControlInterface[]
 
   constructor() { }

@@ -1,26 +1,26 @@
 <div class="login-background">
-  <div class=" container login-controls text-white d-flex justify-content-center">
-    <div class="d-flex align-items-center">
-      <img src="assets/img/logopolimarket.png" class="myImages logo-polimarket" style="padding: 0px 20px">
-    </div>
-    <form [formGroup]="formGroup">
-      <div>
-        <p>Tipo de Usuario </p>
-        <select class="btn btn-outline-light browser-default custom-select" (change)="selectChangeHandler($event)">
-          <option *ngFor="let rol of roles">{{rol.nombre}}</option>
-        </select>
-        <app-base-control [formGroup]="formGroup" [campos]="campos"></app-base-control>
-        <br>
-        <div class="login-buttons">
-          <button type="submit" class="btn btn-light btn-lg col-md-12 text-primary" (click)="validarUsuario()">Ingresar</button>
-          <div class="olvidaste" style="margin-bottom: 20px">
-            <a href="#">¿Olvidaste tu contraseña?</a>
+  <div class=" container login-controls text-white">
+      <img src="assets/img/logopolimarket.png" class="myImages logo-polimarket" style="margin: 20px 0px">
+      <form [formGroup]="formGroup">
+        <div>
+          <p>Tipo de Usuario </p>
+          <select class="btn btn-outline-light browser-default custom-select" (change)="selectChangeHandler($event)">
+            <option *ngFor="let rol of roles">{{rol.nombre}}</option>
+          </select><br><br>
+          <app-base-control [formGroup]="formGroup" [campos]="campos"></app-base-control>
+          <br>
+          <div class="login-buttons">
+            <button type="submit" class="btn btn-primary btn-lg col-md-12" (click)="validarUsuario()">Ingresar</button>
+            <div class="olvidaste" style="margin-bottom: 20px">
+              <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+            <!--
+            <button class="btn btn-light btn-lg col-md-12 text-primary" [routerLink]="['/cliente']">Ingresar con Google</button>
+            <button class="btn btn-light btn-lg col-md-12 text-primary" [routerLink]="['/cliente']">Ingresar con Facebook</button><br>
+            -->
+            <button class="btn btn-danger btn-lg col-md-12 text-white" [routerLink]="['/sign-in']">Registrate</button>
           </div>
-          <button class="btn btn-light btn-lg col-md-12 text-primary" [routerLink]="['/cliente']">Ingresar con Google</button>
-          <button class="btn btn-light btn-lg col-md-12 text-primary" [routerLink]="['/cliente']">Ingresar con Facebook</button><br>
-          <button class="btn btn-danger btn-lg col-md-12 text-white" [routerLink]="['/sign-in']">Registrate</button>
         </div>
-      </div>
-    </form>
+      </form>
   </div>
 </div>

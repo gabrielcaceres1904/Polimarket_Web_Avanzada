@@ -10,6 +10,11 @@ const routes: Routes = [
     component: RutaLoginComponent
   },
   {
+    path: 'home-cliente',
+    component: RutaHomeclienteComponent,
+    children: []
+  },
+  {
     path: 'sign-in',
     component: RutaSignInComponent
   },

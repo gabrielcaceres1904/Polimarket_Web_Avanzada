@@ -1,1 +1,22 @@
-<p>ruta-sign-in works!</p>
+<div class="sign-in-background d-flex justify-content-center align-items-center">
+  <div class="form-sign-in d-flex justify-content-center align-items-center">
+    <div style="padding: 0px 20px">
+      <div style="background-color: #40bfff">
+        <h3 class="title-sign-in">Tus comparas diarias al alcance de tu mano</h3>
+        <div class="imagen-sign-in"></div>
+      </div>
+    </div>
+    <form [formGroup]="formGroup">
+      <div class="d-flex justify-content-center">
+        <app-base-control [formGroup]="formGroup" [campos]="[campos[0]]"></app-base-control>
+        <app-base-control [formGroup]="formGroup" [campos]="[campos[1]]"></app-base-control>
+      </div>
+      <div>
+        <app-base-control [formGroup]="formGroup" [campos]="[campos[2], campos[3], campos[4], campos[5]]"></app-base-control>
+      </div>
+      <p *ngIf="coincidencia" style="color: red">Las contraseñas no coinciden</p>
+      <button class="btn btn-primary btn-lg col-md-12 text-white" (click)="registrarUsuario()">Registrarse</button>
+    </form>
+  </div>
+</div>
+

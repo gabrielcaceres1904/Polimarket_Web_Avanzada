@@ -17,13 +17,14 @@ export class RutaLoginComponent implements OnInit {
 
   campos = [
     {
-      titulo: '', nombre: 'nombreUsuario', tipo: 'text', placeholder: 'Nombre de usuario', requeridoM: 'El nombre de usuario es requerido', longitudM: ''
+      titulo: 'Correo electrónico', nombre: 'correoUsuario', tipo: 'text', placeholder: 'Ingresa tu correo electrónico', requeridoM: 'El correo electrónico es requerido', longitudM: ''
     },
     {
-      titulo: '', nombre: 'passwordUsuario', tipo: 'password', placeholder: 'Contraseña', requeridoM: 'La contraseña es requerida', longitudM: ''
+      titulo: 'Contraseña', nombre: 'passwordUsuario', tipo: 'password', placeholder: 'Ingresa tu contraseña', requeridoM: 'La contraseña es requerida', longitudM: ''
     },
   ] as baseControlInterface[]
 
+  usuarioInvalidado = false
 
   constructor(private readonly router: Router,
               private readonly activatedRoute: ActivatedRoute,
@@ -33,7 +34,7 @@ export class RutaLoginComponent implements OnInit {
     this.formGroup =this.formBuilder.group(
       {
         tipoUsuario: [Validators.required],
-        nombreUsuario: ['', Validators.required],
+        correoUsuario: ['', Validators.required],
         passwordUsuario: ['', Validators.required],
       }
     )
@@ -62,11 +63,12 @@ export class RutaLoginComponent implements OnInit {
   }
 
   validarUsuario() {
-    const nombreUsuario = this.formGroup.get('nombreUsuario')?.value
+    const correoUsuario = this.formGroup.get('correoUsuario')?.value
+    const passwordUsuario = this.formGroup.get('passwordUsuario')?.value
     const tipoUsuario = this.formGroup.get('tipoUsuario')?.value
-    this.rolService.buscarTodos({
 
-    })
+    const ruta = ['/home-cliente'];
+    this.router.navigate(ruta);
   }
 
   buscarUsuario(id:number){
