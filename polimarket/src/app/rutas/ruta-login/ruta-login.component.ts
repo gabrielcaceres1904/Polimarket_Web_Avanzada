@@ -63,11 +63,14 @@ export class RutaLoginComponent implements OnInit {
 
   validarUsuario() {
     const nombreUsuario = this.formGroup.get('nombreUsuario')?.value
-    const password = this.formGroup.get('passwordUsuario')?.value
+    const tipoUsuario = this.formGroup.get('tipoUsuario')?.value
+    this.rolService.buscarTodos({
 
+    })
   }
 
   buscarUsuario(id:number){
+    /*
     const buscarPeliculaId$ = this.peliculaService.buscarUno(id);
     buscarPeliculaId$
       .subscribe(
@@ -81,5 +84,7 @@ export class RutaLoginComponent implements OnInit {
           }
         }
       )
+
+     */
   }
 }
