@@ -1,0 +1,22 @@
+<div *ngFor="let campo of campos">
+  <div [formGroup]="formGroup" class="form-group" style="margin: 15px 0px">
+    <label for="{{campo.nombre}}">{{campo.titulo}}</label>
+    <input formControlName="{{campo.nombre}}" type="{{campo.tipo}}" class="form-control" id="{{campo.nombre}}" placeholder="{{campo.placeholder}}">
+    <div *ngIf="formGroup.get(campo.nombre)">
+      <div class="alert alert-warning" role="alert" *ngIf="
+             formGroup.get(campo.nombre)?.invalid &&
+             formGroup.get(campo.nombre)?.touched &&
+             formGroup.get(campo.nombre)?.dirty
+          ">
+        <span *ngIf="formGroup.get(campo.nombre)?.hasError('required')">
+          {{campo.requeridoM}}
+        </span>
+        <span *ngIf="formGroup.get(campo.nombre)?.hasError('minlength')">
+          {{campo.longitudM}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
