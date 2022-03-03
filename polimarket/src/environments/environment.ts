@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlJPC: 'https://localhost:44332/api'
+  urlJPC: 'https://localhost:44330/api'
 };
 
 /*

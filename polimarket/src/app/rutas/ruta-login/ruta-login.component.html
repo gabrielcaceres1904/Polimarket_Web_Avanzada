@@ -4,8 +4,8 @@
       <form [formGroup]="formGroup">
         <div>
           <p>Tipo de Usuario </p>
-          <select class="btn btn-outline-light browser-default custom-select" (change)="selectChangeHandler($event)">
-            <option *ngFor="let rol of roles">{{rol.nombre}}</option>
+          <select class="btn btn-outline-light browser-default custom-select" (change)="selectChangeHandler($event)" formControlName="tipoUsuario">
+            <option *ngFor="let rol of roles" value="{{rol.idRol}}">{{rol.nombre}}</option>
           </select><br><br>
           <app-base-control [formGroup]="formGroup" [campos]="campos"></app-base-control>
           <br>

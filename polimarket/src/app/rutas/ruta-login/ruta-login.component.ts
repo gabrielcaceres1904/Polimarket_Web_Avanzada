@@ -4,6 +4,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {baseControlInterface} from "../../servicios/interfaces/base-control.interface";
 import {RolService} from "../../servicios/http/rol.service";
 import {RolInterface} from "../../servicios/interfaces/modelo/rol.interface";
+import {UsuarioService} from "../../servicios/http/usuario.service";
+import {UsuarioInterface} from "../../servicios/interfaces/modelo/usuario.interface";
+import {UsuarioRolService} from "../../servicios/http/usuario-rol.service";
+import {UsuarioRolInterface} from "../../servicios/interfaces/modelo/usuario-rol.interface";
 
 @Component({
   selector: 'app-ruta-login',
@@ -24,12 +28,15 @@ export class RutaLoginComponent implements OnInit {
     },
   ] as baseControlInterface[]
 
-  usuarioInvalidado = false
+  mensajeUsuarioInvalidado = false
+  usuarioValidado: UsuarioInterface = {} as UsuarioInterface
 
   constructor(private readonly router: Router,
               private readonly activatedRoute: ActivatedRoute,
               private readonly formBuilder: FormBuilder,
-              private readonly rolService: RolService) {
+              private readonly rolService: RolService,
+              private readonly usuarioService: UsuarioService,
+              private readonly usuarioRolService: UsuarioRolService) {
 
     this.formGroup =this.formBuilder.group(
       {
@@ -63,9 +70,59 @@ export class RutaLoginComponent implements OnInit {
   }
 
   validarUsuario() {
-    const correoUsuario = this.formGroup.get('correoUsuario')?.value
-    const passwordUsuario = this.formGroup.get('passwordUsuario')?.value
+    const correoUsuario = this.formGroup.get('correoUsuario')?.value.trim()
+    const passwordUsuario = this.formGroup.get('passwordUsuario')?.value.trim()
     const tipoUsuario = this.formGroup.get('tipoUsuario')?.value
+    console.log('Este es el rol: ', tipoUsuario)
+
+    this.usuarioService.buscarTodos(
+      {
+        email: correoUsuario,
+        password: passwordUsuario,
+      }
+    ).subscribe({
+        next: (datos) => { // try then
+          const usuarios = datos as UsuarioInterface[]
+
+          // Verificar correo y password
+          for(let usuario of usuarios){
+            if(correoUsuario === usuario.email.trim() && passwordUsuario === usuario.password.trim()){
+              this.mensajeUsuarioInvalidado = false
+              this.usuarioValidado = usuario
+              console.log('Existe usuario con este correo y password')
+
+              // Verificar el tipo de usuario
+              this.usuarioRolService.buscarTodos({})
+                .subscribe(
+                  {
+                    next: (data) => {
+                      const usuariosRoles = data as UsuarioRolInterface[]
+                      console.log(usuariosRoles)
+                      for(let usuarioRol of usuariosRoles){
+                        console.log('Rol: ', usuarioRol.idRol, ' Usuario: ', usuarioRol.idUsuario)
+                        if(tipoUsuario === usuarioRol.idRol && this.usuarioValidado.idUsuario === usuarioRol.idUsuario){
+                          console.log('El tipo de usuario coincide')
+                          return
+                        }
+                      }
+                      console.log('El tipo de usuario no coincide')
+                    },
+                    error: (error) => {
+                      console.error(error)
+                    }
+                  }
+                )
+              return
+            }
+          }
+          console.log('El correo y/o password no coinciden')
+          this.mensajeUsuarioInvalidado = true
+        },
+        error: (error) => { // catch
+          console.error({error});
+        },
+      }
+    )
 
     const ruta = ['/home-cliente'];
     this.router.navigate(ruta);

@@ -4,6 +4,10 @@ import {baseControlInterface} from "../../servicios/interfaces/base-control.inte
 import {Router} from "@angular/router";
 import {UsuarioCreateInterface} from "../../servicios/interfaces/create/usuarioCreate.interface";
 import {UsuarioService} from "../../servicios/http/usuario.service";
+import {UsuarioInterface} from "../../servicios/interfaces/modelo/usuario.interface";
+import {UsuarioRolService} from "../../servicios/http/usuario-rol.service";
+import {UsuarioRolCreateInterface} from "../../servicios/interfaces/create/usuarioRolCreate.interface";
+import {UsuarioRolInterface} from "../../servicios/interfaces/modelo/usuario-rol.interface";
 
 @Component({
   selector: 'app-ruta-sign-in',
@@ -39,7 +43,8 @@ export class RutaSignInComponent implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly formBuilder: FormBuilder,
-              private readonly usuarioService: UsuarioService) {
+              private readonly usuarioService: UsuarioService,
+              private readonly usuarioRolService: UsuarioRolService) {
     this.formGroup =this.formBuilder.group(
       {
         nombre: ['', Validators.required],
@@ -56,12 +61,12 @@ export class RutaSignInComponent implements OnInit {
   }
 
   registrarUsuario() {
-    const nombre =  this.formGroup.get('nombre')?.value
-    const apellido =  this.formGroup.get('apellido')?.value
-    const correo =  this.formGroup.get('correo')?.value
-    const domicilio =  this.formGroup.get('domicilio')?.value
-    const password =  this.formGroup.get('passwordUsuario')?.value
-    const confirmacion =  this.formGroup.get('passwordConfirmacion')?.value
+    const nombre =  this.formGroup.get('nombre')?.value.trim()
+    const apellido =  this.formGroup.get('apellido')?.value.trim()
+    const correo =  this.formGroup.get('correo')?.value.trim()
+    const domicilio =  this.formGroup.get('domicilio')?.value.trim()
+    const password =  this.formGroup.get('passwordUsuario')?.value.trim()
+    const confirmacion =  this.formGroup.get('passwordConfirmacion')?.value.trim()
 
     if(password === confirmacion){
       this.coincidencia = false
@@ -72,11 +77,31 @@ export class RutaSignInComponent implements OnInit {
         email: correo,
         password: password
       } as UsuarioCreateInterface
+
+      // Crear Usuario
       this.usuarioService.crear(usuario)
         .subscribe(
           {
             next: (data) => {
               console.log(data)
+              const  usuarioCreado = data as UsuarioInterface
+              let usuarioRol: UsuarioRolCreateInterface = {
+                idUsuario: usuarioCreado.idUsuario,
+                idRol: 1
+              } as UsuarioRolCreateInterface
+
+              // Crear Rol Usuario
+              this.usuarioRolService.crear(usuarioRol)
+                .subscribe(
+                  {
+                    next: (data) => {
+                      console.log(data)
+                    },
+                    error: (error) => {
+                      console.error(error)
+                    }
+                  }
+                )
             },
             error: (error) => {
               console.error(error)

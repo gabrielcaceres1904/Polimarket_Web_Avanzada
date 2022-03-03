@@ -5,6 +5,7 @@ import {PermisoCreateInterface} from "../interfaces/create/permisoCreate.interfa
 import {map, Observable} from "rxjs";
 import {PermisoInterface} from "../interfaces/modelo/permiso.interface";
 import {UsuarioRolInterface} from "../interfaces/modelo/usuario-rol.interface";
+import {UsuarioRolCreateInterface} from "../interfaces/create/usuarioRolCreate.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UsuarioRolService {
 
   }
 
-  crear(entidad: UsuarioRolInterface): Observable<UsuarioRolInterface>{
+  crear(entidad: UsuarioRolCreateInterface): Observable<UsuarioRolInterface>{
     return this.httpClient.post(this.url,entidad,{})
       .pipe(
         map(
@@ -46,9 +47,10 @@ export class UsuarioRolService {
         )
       );
   }
-  buscarRolDeUsuario(idUsuario: number):Observable<UsuarioRolInterface>{
+
+  buscarRolDeUsuario(idUsuarioRol: number):Observable<UsuarioRolInterface>{
     return this.httpClient
-      .get(this.url + '/' + idUsuario)
+      .get(this.url + '/' + idUsuarioRol)
       .pipe(
         map(
           (resultadoEnData) => resultadoEnData as UsuarioRolInterface
@@ -56,20 +58,20 @@ export class UsuarioRolService {
       );
   }
 
-  actualizarPorId(idPermiso:number, datosActualizar: PermisoCreateInterface): Observable<PermisoInterface>{
-    return this.httpClient.put(this.url  + '/' + idPermiso, datosActualizar)
+  actualizarPorId(idUsuarioRol:number, datosActualizar: UsuarioRolCreateInterface): Observable<UsuarioRolInterface>{
+    return this.httpClient.put(this.url  + '/' + idUsuarioRol, datosActualizar)
       .pipe(
         map(
-          (resultadoEnData) => resultadoEnData as PermisoInterface
+          (resultadoEnData) => resultadoEnData as UsuarioRolInterface
         )
       )
   }
 
-  eliminarPorId(idPermiso:number):Observable<PermisoInterface>{
-    return this.httpClient.delete(this.url  + '/' + idPermiso)
+  eliminarPorId(idUsuarioRol:number):Observable<UsuarioRolInterface>{
+    return this.httpClient.delete(this.url  + '/' + idUsuarioRol)
       .pipe(
         map(
-          (resultadoEnData) => resultadoEnData as PermisoInterface
+          (resultadoEnData) => resultadoEnData as UsuarioRolInterface
         )
       )
   }
