@@ -13,6 +13,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RutaSignInComponent } from './rutas/ruta-sign-in/ruta-sign-in.component';
 import { BaseControlComponent } from './componentes/base-control/base-control.component';
+import { RutaHomeAdminComponent } from './rutas/Administrador/ruta-home-admin/ruta-home-admin.component';
+import { RutaHomeAdminGeneralComponent } from './rutas/AdministradorGeneral/ruta-home-admin-general/ruta-home-admin-general.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { BaseControlComponent } from './componentes/base-control/base-control.co
     RutaNotFoundComponent,
     RutaLoginComponent,
     RutaSignInComponent,
-    BaseControlComponent
+    BaseControlComponent,
+    RutaHomeAdminComponent,
+    RutaHomeAdminGeneralComponent
   ],
   imports: [
     BrowserModule,

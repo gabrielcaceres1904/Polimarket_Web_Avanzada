@@ -28,7 +28,8 @@ export class RutaLoginComponent implements OnInit {
     },
   ] as baseControlInterface[]
 
-  mensajeUsuarioInvalidado = false
+  credencialesValidas = false
+  tipoUsuarioValido = false
   usuarioValidado: UsuarioInterface = {} as UsuarioInterface
 
   constructor(private readonly router: Router,
@@ -46,6 +47,7 @@ export class RutaLoginComponent implements OnInit {
       }
     )
     this.buscarRoles()
+
   }
 
   ngOnInit(): void {
@@ -72,8 +74,8 @@ export class RutaLoginComponent implements OnInit {
   validarUsuario() {
     const correoUsuario = this.formGroup.get('correoUsuario')?.value.trim()
     const passwordUsuario = this.formGroup.get('passwordUsuario')?.value.trim()
-    const tipoUsuario = this.formGroup.get('tipoUsuario')?.value
-    console.log('Este es el rol: ', tipoUsuario)
+    const tipoUsuario = Number.parseInt(this.formGroup.get('tipoUsuario')?.value.toString())
+    //console.log('Este es el rol: ', tipoUsuario)
 
     this.usuarioService.buscarTodos(
       {
@@ -87,9 +89,9 @@ export class RutaLoginComponent implements OnInit {
           // Verificar correo y password
           for(let usuario of usuarios){
             if(correoUsuario === usuario.email.trim() && passwordUsuario === usuario.password.trim()){
-              this.mensajeUsuarioInvalidado = false
+              this.credencialesValidas = false
               this.usuarioValidado = usuario
-              console.log('Existe usuario con este correo y password')
+              //console.log('Existe usuario con este correo y password')
 
               // Verificar el tipo de usuario
               this.usuarioRolService.buscarTodos({})
@@ -97,15 +99,32 @@ export class RutaLoginComponent implements OnInit {
                   {
                     next: (data) => {
                       const usuariosRoles = data as UsuarioRolInterface[]
-                      console.log(usuariosRoles)
                       for(let usuarioRol of usuariosRoles){
-                        console.log('Rol: ', usuarioRol.idRol, ' Usuario: ', usuarioRol.idUsuario)
+                        //console.log('Rol: ', usuarioRol.idRol, ' Usuario: ', usuarioRol.idUsuario)
+                        //console.log('RolUsuario: ', tipoUsuario, ' UsuarioValidado: ', this.usuarioValidado.idUsuario)
                         if(tipoUsuario === usuarioRol.idRol && this.usuarioValidado.idUsuario === usuarioRol.idUsuario){
                           console.log('El tipo de usuario coincide')
+                          this.tipoUsuarioValido = false
+
+                          // Ingreso del usuario
+                          if(!this.credencialesValidas && !this.tipoUsuarioValido){
+                            if(tipoUsuario === 1){
+                              const ruta = ['/cliente'];
+                              this.router.navigate(ruta);
+                            }else if(tipoUsuario === 2){
+                              const ruta = ['/admin'];
+                              this.router.navigate(ruta);
+                            }else if(tipoUsuario === 3){
+                              const ruta = ['/admin-general'];
+                              this.router.navigate(ruta);
+                            }
+                          }
+
                           return
                         }
                       }
                       console.log('El tipo de usuario no coincide')
+                      this.tipoUsuarioValido = true
                     },
                     error: (error) => {
                       console.error(error)
@@ -116,16 +135,13 @@ export class RutaLoginComponent implements OnInit {
             }
           }
           console.log('El correo y/o password no coinciden')
-          this.mensajeUsuarioInvalidado = true
+          this.credencialesValidas = true
         },
         error: (error) => { // catch
           console.error({error});
         },
       }
     )
-
-    const ruta = ['/home-cliente'];
-    this.router.navigate(ruta);
   }
 
   buscarUsuario(id:number){
