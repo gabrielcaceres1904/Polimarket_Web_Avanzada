@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+
+
+  @Input()
+  categories: {
+    idCategoria: number,
+    categoria: string,
+    cantProductos: number
+  }[] = []
+
   categorias=[
     {
       categoria:"Lacteos",
@@ -65,9 +75,19 @@ export class SidebarComponent implements OnInit {
     }
 
   ]
-  constructor() { }
+  constructor(private readonly router: Router,) { }
 
   ngOnInit(): void {
   }
 
+  actualizarProductos(categoria: any) {
+    this.router.navigate(
+      ['/cliente', 'home'],
+      {
+        queryParams: {
+          categoria: categoria
+        }
+      }
+    )
+  }
 }

@@ -1,9 +1,7 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {PermisoCreateInterface} from "../interfaces/create/permisoCreate.interface";
 import {map, Observable} from "rxjs";
-import {PermisoInterface} from "../interfaces/modelo/permiso.interface";
 import {UsuarioCreateInterface} from "../interfaces/create/usuarioCreate.interface";
 import {UsuarioInterface} from "../interfaces/modelo/usuario.interface";
 

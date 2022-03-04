@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {baseControlInterface} from "../../servicios/interfaces/base-control.interface";
+import {baseControlInterface} from "../../servicios/interfaces/app/base-control.interface";
 import {Router} from "@angular/router";
 import {UsuarioCreateInterface} from "../../servicios/interfaces/create/usuarioCreate.interface";
 import {UsuarioService} from "../../servicios/http/usuario.service";

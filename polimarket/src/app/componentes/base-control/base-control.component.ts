@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {baseControlInterface} from "../../servicios/interfaces/base-control.interface";
+import {baseControlInterface} from "../../servicios/interfaces/app/base-control.interface";
 
 @Component({
   selector: 'app-base-control',

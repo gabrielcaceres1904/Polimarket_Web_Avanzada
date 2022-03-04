@@ -5,6 +5,7 @@ import {RutaHomeclienteComponent} from "./rutas/Cliente/ruta-homecliente/ruta-ho
 import {RutaSignInComponent} from "./rutas/ruta-sign-in/ruta-sign-in.component";
 import {RutaHomeAdminComponent} from "./rutas/Administrador/ruta-home-admin/ruta-home-admin.component";
 import {RutaHomeAdminGeneralComponent} from "./rutas/AdministradorGeneral/ruta-home-admin-general/ruta-home-admin-general.component";
+import {RutaListaProductosComponent} from "./rutas/Cliente/ruta-lista-productos/ruta-lista-productos.component";
 
 const routes: Routes = [
   {
@@ -24,7 +25,12 @@ const routes: Routes = [
   {
     path: 'cliente',
     component: RutaHomeclienteComponent,
-    children: []
+    children: [
+      {
+        path: 'home',
+        component: RutaListaProductosComponent
+      },
+    ]
   },
 
   // Administrador

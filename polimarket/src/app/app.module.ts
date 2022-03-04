@@ -15,6 +15,8 @@ import { RutaSignInComponent } from './rutas/ruta-sign-in/ruta-sign-in.component
 import { BaseControlComponent } from './componentes/base-control/base-control.component';
 import { RutaHomeAdminComponent } from './rutas/Administrador/ruta-home-admin/ruta-home-admin.component';
 import { RutaHomeAdminGeneralComponent } from './rutas/AdministradorGeneral/ruta-home-admin-general/ruta-home-admin-general.component';
+import { RutaListaProductosComponent } from './rutas/Cliente/ruta-lista-productos/ruta-lista-productos.component';
+import { OfertaBoxComponent } from './componentes/oferta-box/oferta-box.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { RutaHomeAdminGeneralComponent } from './rutas/AdministradorGeneral/ruta
     RutaSignInComponent,
     BaseControlComponent,
     RutaHomeAdminComponent,
-    RutaHomeAdminGeneralComponent
+    RutaHomeAdminGeneralComponent,
+    RutaListaProductosComponent,
+    OfertaBoxComponent
   ],
   imports: [
     BrowserModule,

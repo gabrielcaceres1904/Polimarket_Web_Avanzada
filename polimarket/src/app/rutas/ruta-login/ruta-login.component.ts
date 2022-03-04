@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {baseControlInterface} from "../../servicios/interfaces/base-control.interface";
+import {baseControlInterface} from "../../servicios/interfaces/app/base-control.interface";
 import {RolService} from "../../servicios/http/rol.service";
 import {RolInterface} from "../../servicios/interfaces/modelo/rol.interface";
 import {UsuarioService} from "../../servicios/http/usuario.service";
@@ -109,7 +109,7 @@ export class RutaLoginComponent implements OnInit {
                           // Ingreso del usuario
                           if(!this.credencialesValidas && !this.tipoUsuarioValido){
                             if(tipoUsuario === 1){
-                              const ruta = ['/cliente'];
+                              const ruta = ['/cliente', 'home'];
                               this.router.navigate(ruta);
                             }else if(tipoUsuario === 2){
                               const ruta = ['/admin'];

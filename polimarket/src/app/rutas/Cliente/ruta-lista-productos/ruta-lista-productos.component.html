@@ -1,0 +1,17 @@
+<div class="container-fluid" >
+  <div class="d-flex justify-content-start">
+    <div
+      class="col-md-2"
+      style="background: #f6f7f8;
+    margin:10px 25px 10px 25px">
+      <app-sidebar [categories]="detalleCategorias"></app-sidebar>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <div *ngFor="let oferta of ofertas" class="col-md-3">
+          <app-oferta-box [formatoOferta]="oferta" (click)="verOferta(oferta)"></app-oferta-box>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
