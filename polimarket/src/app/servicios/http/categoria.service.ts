@@ -1,9 +1,7 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {ProductoCreateInterface} from "../interfaces/create/productoCreate.interface";
 import {map, Observable} from "rxjs";
-import {ProductoInterface} from "../interfaces/modelo/producto.interface";
 import {CategoriaInterface} from "../interfaces/modelo/categoria.interface";
 import {CategoriaCreateInterface} from "../interfaces/create/categoriaCreate.interface";
 

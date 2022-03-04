@@ -6,6 +6,9 @@ import {RutaSignInComponent} from "./rutas/ruta-sign-in/ruta-sign-in.component";
 import {RutaHomeAdminComponent} from "./rutas/Administrador/ruta-home-admin/ruta-home-admin.component";
 import {RutaHomeAdminGeneralComponent} from "./rutas/AdministradorGeneral/ruta-home-admin-general/ruta-home-admin-general.component";
 import {RutaListaProductosComponent} from "./rutas/Cliente/ruta-lista-productos/ruta-lista-productos.component";
+import {RutaCarritoComponent} from "./rutas/Cliente/ruta-carrito/ruta-carrito.component";
+import {RutaPerfilComponent} from "./rutas/Cliente/ruta-perfil/ruta-perfil.component";
+import {RutaResumenComponent} from "./rutas/Cliente/ruta-resumen/ruta-resumen.component";
 
 const routes: Routes = [
   {
@@ -30,6 +33,18 @@ const routes: Routes = [
         path: 'home',
         component: RutaListaProductosComponent
       },
+      {
+        path: 'carrito',
+        component: RutaCarritoComponent
+      },
+      {
+        path: 'perfil',
+        component: RutaPerfilComponent
+      },
+      {
+        path: 'resumen',
+        component: RutaResumenComponent
+      }
     ]
   },
 

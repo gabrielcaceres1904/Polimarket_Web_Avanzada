@@ -1,0 +1,17 @@
+<h1 mat-dialog-title class="d-flex justify-content-center">Ingresar producto al carrito</h1>
+<div class="d-flex flex-row">
+  <img src="{{prefix + data.producto.codigo}}" class="col-md-6">
+  <div class="d-flex flex-column">
+    <div mat-dialog-content class="d-flex justify-content-center">{{data.producto.nombre}}</div>
+    <div mat-dialog-content class="d-flex justify-content-center">Precio: ${{data.producto.precio}}</div>
+    <div mat-dialog-content class="d-flex justify-content-center">Categoría: {{data.producto.idCategoria}}</div><br>
+    <mat-form-field appearance="fill" class="d-flex justify-content-center">
+      <mat-label>Cantidad</mat-label>
+      <input matInput [(ngModel)]="cantidad" type="number">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-info" style="margin: 0px 20px" (click)="agregarProducto()">Agregar al carrito</button>
+  <button class="btn btn-danger" style="margin: 0px 20px" (click)="cancelar()">Cancelar</button>
+</div>

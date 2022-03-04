@@ -14,5 +14,4 @@ export class RutaHomeclienteComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

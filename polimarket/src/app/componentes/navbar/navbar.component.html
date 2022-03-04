@@ -12,24 +12,24 @@
       <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 float-right">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" style="font-weight: bold;"  >
+            <a class="nav-link active" aria-current="page" (click)="verPerfil()" style="font-weight: bold;"  >
               <span class="bi-person" style="font-size: 25px"></span>
               Perfil
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link active" (click)="verCarrito()">
               <span class="bi bi-cart" style="font-size: 25px"></span>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#" style="font-weight: bold">
+            <a class="nav-link" (click)="verResumenMensual()" style="font-weight: bold">
               <span style="font-size: 25px"></span>
               Resumen Mensual
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#" >
+            <a class="nav-link" (click)="cerrarSesion()" >
               <span style="font-size: 25px" class="bi-box-arrow-right"></span>
             </a>
           </li>

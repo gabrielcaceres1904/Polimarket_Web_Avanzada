@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OfertaBoxInterface} from "../../../servicios/interfaces/app/oferta-box.interface";
 import {ActivatedRoute} from "@angular/router";
 import {ProductoService} from "../../../servicios/http/producto.service";
 import {CategoriaService} from "../../../servicios/http/categoria.service";
 import {CategoriaInterface} from "../../../servicios/interfaces/modelo/categoria.interface";
 import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalComponent} from "../../../componentes/modal/modal.component";
+import {CompraCarritoInterface} from "../../../servicios/interfaces/app/compra-carrito.interface";
+import {GlobalDataService} from "../../../servicios/global/global-data.service";
 
 
 @Component({
@@ -14,6 +18,7 @@ import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.i
 })
 export class RutaListaProductosComponent implements OnInit {
 
+  // Lista de ofertas
   prefix = 'https://bit.ly/'
 
   detalleCategorias: {
@@ -25,9 +30,14 @@ export class RutaListaProductosComponent implements OnInit {
   ofertas:OfertaBoxInterface[] = []
   categoriaSeleccionada = ''
 
+  // Compras del carrito
+  productoSeleccionado: ProductoInterface = {} as ProductoInterface
+  carrito: CompraCarritoInterface[] = []
+
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly productoService: ProductoService,
-              private readonly categoriaService: CategoriaService) {
+              private readonly categoriaService: CategoriaService,
+              public dialog: MatDialog) {
     this.buscarCategorias()
   }
 
@@ -51,8 +61,46 @@ export class RutaListaProductosComponent implements OnInit {
   }
 
   verOferta(oferta: any) {
-    // @ts-ignore
-    console.log('Has dado clic a la oferta ', this.ofertas.indexOf(oferta))
+    const ofertaInterface = oferta as OfertaBoxInterface
+
+    this.productoService.buscarUno(ofertaInterface.idProducto)
+      .subscribe(
+        {
+          next: (datos) => { // try then
+            this.productoSeleccionado = datos as ProductoInterface
+          },
+          error: (error) => { // catch
+            console.error({error});
+          },
+          complete: () => {
+            const referenciaDialogo = this.dialog.open(
+              ModalComponent,
+              {
+                disableClose: false,
+                data: {
+                  producto: this.productoSeleccionado
+                }
+              }
+            )
+            const despuesCerrado$ = referenciaDialogo.afterClosed()
+            despuesCerrado$
+              .subscribe(
+                (datos) => {
+                  if(datos!=undefined){
+                    this.carrito.push(
+                      {
+                        producto: this.productoSeleccionado,
+                        cantidad: Number.parseInt(datos['cantidad'])
+                      }
+                    )
+                    console.log(this.carrito)
+                    GlobalDataService.comprasCarrito = this.carrito
+                  }
+                }
+              )
+          }
+        }
+      )
   }
 
   private buscarProductos(categoria: number) {
@@ -67,6 +115,7 @@ export class RutaListaProductosComponent implements OnInit {
                 ofertasCategoria.push(
                   {
                     nombre: producto.nombre,
+                    idProducto: producto.idProducto,
                     url: this.prefix + producto.codigo,
                     precio: producto.precio
                   }

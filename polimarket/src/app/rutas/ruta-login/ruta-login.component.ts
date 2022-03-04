@@ -8,6 +8,7 @@ import {UsuarioService} from "../../servicios/http/usuario.service";
 import {UsuarioInterface} from "../../servicios/interfaces/modelo/usuario.interface";
 import {UsuarioRolService} from "../../servicios/http/usuario-rol.service";
 import {UsuarioRolInterface} from "../../servicios/interfaces/modelo/usuario-rol.interface";
+import {GlobalDataService} from "../../servicios/global/global-data.service";
 
 @Component({
   selector: 'app-ruta-login',
@@ -108,6 +109,7 @@ export class RutaLoginComponent implements OnInit {
 
                           // Ingreso del usuario
                           if(!this.credencialesValidas && !this.tipoUsuarioValido){
+                            GlobalDataService.usuarioActual = this.usuarioValidado
                             if(tipoUsuario === 1){
                               const ruta = ['/cliente', 'home'];
                               this.router.navigate(ruta);

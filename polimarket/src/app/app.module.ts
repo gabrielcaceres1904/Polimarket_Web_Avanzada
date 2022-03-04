@@ -17,6 +17,14 @@ import { RutaHomeAdminComponent } from './rutas/Administrador/ruta-home-admin/ru
 import { RutaHomeAdminGeneralComponent } from './rutas/AdministradorGeneral/ruta-home-admin-general/ruta-home-admin-general.component';
 import { RutaListaProductosComponent } from './rutas/Cliente/ruta-lista-productos/ruta-lista-productos.component';
 import { OfertaBoxComponent } from './componentes/oferta-box/oferta-box.component';
+import { RutaCarritoComponent } from './rutas/Cliente/ruta-carrito/ruta-carrito.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalComponent } from './componentes/modal/modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import { RutaPerfilComponent } from './rutas/Cliente/ruta-perfil/ruta-perfil.component';
+import { RutaResumenComponent } from './rutas/Cliente/ruta-resumen/ruta-resumen.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +40,11 @@ import { OfertaBoxComponent } from './componentes/oferta-box/oferta-box.componen
     RutaHomeAdminComponent,
     RutaHomeAdminGeneralComponent,
     RutaListaProductosComponent,
-    OfertaBoxComponent
+    OfertaBoxComponent,
+    RutaCarritoComponent,
+    ModalComponent,
+    RutaPerfilComponent,
+    RutaResumenComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +52,10 @@ import { OfertaBoxComponent } from './componentes/oferta-box/oferta-box.componen
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

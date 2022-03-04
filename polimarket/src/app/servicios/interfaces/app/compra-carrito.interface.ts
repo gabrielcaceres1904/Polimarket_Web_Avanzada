@@ -1,7 +1,6 @@
+import {ProductoInterface} from "../modelo/producto.interface";
+
 export interface CompraCarritoInterface {
-  url: string,
-  nombre: string,
-  precioUnitario: number,
-  cantidad: number,
-  valorTotal: number
+  producto: ProductoInterface,
+  cantidad: number
 }
