@@ -11,6 +11,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ModalComponent} from "../../../componentes/modal/modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalPagoComponent} from "../../../componentes/modal-pago/modal-pago.component";
+import {TarjetaService} from "../../../servicios/http/tarjeta.service";
+import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
+import {OfertaBoxInterface} from "../../../servicios/interfaces/app/oferta-box.interface";
+import {TarjetaInterface} from "../../../servicios/interfaces/modelo/tarjeta.interface";
 
 @Component({
   selector: 'app-ruta-carrito',
@@ -20,20 +24,28 @@ import {ModalPagoComponent} from "../../../componentes/modal-pago/modal-pago.com
 })
 export class RutaCarritoComponent implements OnInit {
 
+  idUsuario = -1
+
+  // Carrito
   prefix = 'https://bit.ly/'
   compras: CompraCarritoInterface[] = []
   subtotal = 0
   iva = 0.12
+
+  //Pedidos
   estadoPendiente = 'Pendiente'
 
-  idUsuario = -1
+  // Pagos
+  tieneTarjetas = false
+  tarjetasUsuario: TarjetaInterface[] = []
 
   constructor(private readonly pedidoService: PedidoService,
               private readonly router: Router,
               private readonly pedidoDetalleService: PedidoDetalleService,
               private datePipe: DatePipe,
               private readonly activatedRoute: ActivatedRoute,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private readonly tarjetaService: TarjetaService) {
     // @ts-ignore
     this.compras = GlobalDataService.comprasCarrito
     for(let compra of this.compras){
@@ -50,30 +62,59 @@ export class RutaCarritoComponent implements OnInit {
         next:(parametrosRuta) => {
           //console.log(parametrosRuta)
           this.idUsuario = parametrosRuta['idCliente'];
-          //console.log('Usuario Sidebar: ', this.idUsuario)
         }
       })
   }
 
-  verificarTarjetas(){
+  buscarTarjeta(){
 
   }
 
-  ingresarTarjeta(){
+  verificarTarjetas(){
+    this.tarjetaService.buscarTodos({})
+      .subscribe(
+        {
+          next: (datos) => { // try then
+            const tarjetas = datos as TarjetaInterface[]
+            for(let tarjeta of tarjetas){
+              if(tarjeta.idUsuario == this.idUsuario){
+                this.tieneTarjetas = true
+                this.tarjetasUsuario.push(tarjeta)
+              }
+            }
+          },
+          error: (error) => { // catch
+            console.error({error});
+          },
+          complete: () => {
+            if(!this.tieneTarjetas){
+              this.desplegarModal()
+            }else{
+              this.desplegarModal()
+              console.log('Ya tiene una o más tarjetas')
+            }
+          }
+        }
+      )
+  }
+
+  desplegarModal(){
     const referenciaDialogo = this.dialog.open(
       ModalPagoComponent,
       {
         disableClose: false,
+        data: {
+          idUsuario: this.idUsuario
+        }
       }
     )
     const despuesCerrado$ = referenciaDialogo.afterClosed()
     despuesCerrado$
       .subscribe(
         (datos) => {
-          console.log(datos['tarjeta'])
+          console.log(datos)
           if(datos!=undefined){
             const tarjeta = datos['tarjeta']
-
           }
         }
       )

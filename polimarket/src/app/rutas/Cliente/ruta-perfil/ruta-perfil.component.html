@@ -1,1 +1,10 @@
-<p>ruta-perfil works!</p>
+<h3>Información de perfil</h3>
+<form [formGroup]="formGroup">
+  <div class="container col-md-8">
+    <app-base-control [formGroup]="formGroup" [campos]="campos"></app-base-control>
+    <button class="btn btn-primary btn-lg col-md-6 text-white" (click)="actualizarUsuario()">Actualizar</button>
+    <button class="btn btn-light btn-lg col-md-6" (click)="volver()">Volver</button>
+  </div>
+</form>
+
+

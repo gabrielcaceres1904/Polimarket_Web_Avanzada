@@ -1,14 +1,18 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {RutaListaProductosComponent} from "../../rutas/Cliente/ruta-lista-productos/ruta-lista-productos.component";
 import {RutaCarritoComponent} from "../../rutas/Cliente/ruta-carrito/ruta-carrito.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {baseControlInterface} from "../../servicios/interfaces/app/base-control.interface";
+import {TarjetaInterface} from "../../servicios/interfaces/modelo/tarjeta.interface";
+import {TarjetaCreateInterface} from "../../servicios/interfaces/create/tarjetaCreate.interface";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-modal-pago',
   templateUrl: './modal-pago.component.html',
-  styleUrls: ['./modal-pago.component.scss']
+  styleUrls: ['./modal-pago.component.scss'],
+  providers: [DatePipe]
 })
 export class ModalPagoComponent implements OnInit {
 
@@ -28,7 +32,8 @@ export class ModalPagoComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA)
               public data: any,
               public dialogRef: MatDialogRef<RutaCarritoComponent>,
-              private readonly formBuilder: FormBuilder,) {
+              private readonly formBuilder: FormBuilder,
+              private datePipe: DatePipe,) {
     this.formGroup =this.formBuilder.group(
       {
         tarjeta: ['', Validators.required],
@@ -42,7 +47,21 @@ export class ModalPagoComponent implements OnInit {
   }
 
   ingresarTarjeta() {
-    this.dialogRef.close({tarjeta: this.tarjeta})
+    const numero = this.formGroup.get('tarjeta')?.value
+    const fecha = this.formGroup.get('fechaExpiracion')?.value
+    const expiracion = this.datePipe.transform(fecha, 'yyyy/MM/dd');
+    const cvv = this.formGroup.get('cvv')?.value
+    const idUsuario = this.data.idUsuario
+
+
+
+    const tarjeta = {
+      numero: numero,
+      entidadBancaria: expiracion + '-' + cvv,
+      idUsuario: idUsuario
+    } as TarjetaCreateInterface
+
+    this.dialogRef.close({tarjeta: tarjeta})
   }
 
   cancelar() {

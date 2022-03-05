@@ -27,6 +27,7 @@ import { RutaPerfilComponent } from './rutas/Cliente/ruta-perfil/ruta-perfil.com
 import { RutaResumenComponent } from './rutas/Cliente/ruta-resumen/ruta-resumen.component';
 import { ModalPagoComponent } from './componentes/modal-pago/modal-pago.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
   providers: [],
   bootstrap: [AppComponent]

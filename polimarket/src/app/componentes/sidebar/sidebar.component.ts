@@ -87,7 +87,7 @@ export class SidebarComponent implements OnInit {
     parametroRuta$
       .subscribe({
         next:(parametrosRuta) => {
-          console.log(parametrosRuta)
+          //console.log(parametrosRuta)
           this.idUsuario = parametrosRuta['idCliente'];
           //console.log('Usuario Sidebar: ', this.idUsuario)
         }
