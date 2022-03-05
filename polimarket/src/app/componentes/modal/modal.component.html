@@ -7,7 +7,7 @@
     <div mat-dialog-content class="d-flex justify-content-center">Categoría: {{data.producto.idCategoria}}</div><br>
     <mat-form-field appearance="fill" class="d-flex justify-content-center">
       <mat-label>Cantidad</mat-label>
-      <input matInput [(ngModel)]="cantidad" type="number">
+      <input matInput [(ngModel)]="cantidad" type="number" min="1">
     </mat-form-field>
   </div>
 </div>

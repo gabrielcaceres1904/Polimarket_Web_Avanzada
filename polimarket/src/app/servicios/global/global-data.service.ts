@@ -9,8 +9,4 @@ export class GlobalDataService {
   public static comprasCarrito: CompraCarritoInterface[] = []
   public static usuarioActual: UsuarioInterface = {} as UsuarioInterface
 
-  public static cerrarSesion(){
-    GlobalDataService.usuarioActual = {} as UsuarioInterface
-    GlobalDataService.comprasCarrito = []
-  }
 }

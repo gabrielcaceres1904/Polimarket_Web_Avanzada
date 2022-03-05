@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OfertaBoxInterface} from "../../../servicios/interfaces/app/oferta-box.interface";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductoService} from "../../../servicios/http/producto.service";
 import {CategoriaService} from "../../../servicios/http/categoria.service";
 import {CategoriaInterface} from "../../../servicios/interfaces/modelo/categoria.interface";
@@ -30,11 +30,14 @@ export class RutaListaProductosComponent implements OnInit {
   ofertas:OfertaBoxInterface[] = []
   categoriaSeleccionada = ''
 
+  idUsuario: number = 0
+
   // Compras del carrito
   productoSeleccionado: ProductoInterface = {} as ProductoInterface
   carrito: CompraCarritoInterface[] = []
 
   constructor(private readonly activatedRoute: ActivatedRoute,
+              private readonly router: Router,
               private readonly productoService: ProductoService,
               private readonly categoriaService: CategoriaService,
               public dialog: MatDialog) {
@@ -58,6 +61,18 @@ export class RutaListaProductosComponent implements OnInit {
         },
       }
     )
+
+    // @ts-ignore
+    const parametroRuta$ = this.activatedRoute.parent.params;
+    parametroRuta$
+      .subscribe({
+        next:(parametrosRuta) => {
+          //console.log(parametrosRuta)
+          this.idUsuario = parametrosRuta['idCliente'];
+          //console.log('Usuario Sidebar: ', this.idUsuario)
+        }
+      })
+
   }
 
   verOferta(oferta: any) {

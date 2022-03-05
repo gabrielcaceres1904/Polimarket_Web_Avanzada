@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   // Cliente
   {
-    path: 'cliente',
+    path: 'cliente/:idCliente',
     component: RutaHomeclienteComponent,
     children: [
       {

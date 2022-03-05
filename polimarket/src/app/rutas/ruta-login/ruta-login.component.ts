@@ -104,14 +104,14 @@ export class RutaLoginComponent implements OnInit {
                         //console.log('Rol: ', usuarioRol.idRol, ' Usuario: ', usuarioRol.idUsuario)
                         //console.log('RolUsuario: ', tipoUsuario, ' UsuarioValidado: ', this.usuarioValidado.idUsuario)
                         if(tipoUsuario === usuarioRol.idRol && this.usuarioValidado.idUsuario === usuarioRol.idUsuario){
-                          console.log('El tipo de usuario coincide')
+                          //console.log('El tipo de usuario coincide')
                           this.tipoUsuarioValido = false
 
                           // Ingreso del usuario
                           if(!this.credencialesValidas && !this.tipoUsuarioValido){
                             GlobalDataService.usuarioActual = this.usuarioValidado
                             if(tipoUsuario === 1){
-                              const ruta = ['/cliente', 'home'];
+                              const ruta = ['/cliente', this.usuarioValidado.idUsuario, 'home'];
                               this.router.navigate(ruta);
                             }else if(tipoUsuario === 2){
                               const ruta = ['/admin'];

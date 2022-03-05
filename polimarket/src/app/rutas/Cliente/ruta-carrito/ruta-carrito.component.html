@@ -1,1 +1,51 @@
-<p>ruta-carrito works!</p>
+<div style="margin: 20px">
+  <a [routerLink]="['/cliente', idUsuario, 'home']">Regresar</a>
+</div>
+<div *ngIf="compras.length != 0" >
+  <div class="container">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio Unitario</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Valor Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let compra of compras">
+        <td>
+          <div class="item-carrito">
+            <img src="{{prefix + compra.producto.codigo}}">
+            <span>{{compra.producto.nombre}}</span>
+          </div>
+        </td>
+        <td>${{compra.producto.precio}}</td>
+        <td>
+          <input type="number" min="1" value="{{compra.cantidad}}" (change)="actualizarTotales()" [(ngModel)]="compra.cantidad">
+        </td>
+        <td>${{compra.producto.precio * compra.cantidad}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12 d-flex justify-content-end container">
+    <div class="col-md-4 d-flex flex-column" style="margin: 10px">
+      <table class="col-md-12" style="margin-bottom: 10px">
+        <tr>
+          <td>Subtotal: </td>
+          <td>${{subtotal}}</td>
+        </tr>
+        <tr>
+          <td>IVA: </td>
+          <td>{{iva}}</td>
+        </tr>
+        <tr>
+          <td>Total: </td>
+          <td>${{subtotal * iva}}</td>
+        </tr>
+      </table>
+      <button class="btn btn-primary btn-lg col-md-12 text-white" (click)="registrarPedido()">Comprar</button>
+    </div>
+  </div>
+</div>

@@ -25,6 +25,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { RutaPerfilComponent } from './rutas/Cliente/ruta-perfil/ruta-perfil.component';
 import { RutaResumenComponent } from './rutas/Cliente/ruta-resumen/ruta-resumen.component';
+import { ModalPagoComponent } from './componentes/modal-pago/modal-pago.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 @NgModule({
   declarations: [
@@ -44,19 +46,21 @@ import { RutaResumenComponent } from './rutas/Cliente/ruta-resumen/ruta-resumen.
     RutaCarritoComponent,
     ModalComponent,
     RutaPerfilComponent,
-    RutaResumenComponent
+    RutaResumenComponent,
+    ModalPagoComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

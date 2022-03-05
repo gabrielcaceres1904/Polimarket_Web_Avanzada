@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -75,14 +75,29 @@ export class SidebarComponent implements OnInit {
     }
 
   ]
-  constructor(private readonly router: Router,) { }
+
+  idUsuario = -1
+
+  constructor(private readonly router: Router,
+              private readonly activatedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    // @ts-ignore
+    const parametroRuta$ = this.activatedRoute.parent.params;
+    parametroRuta$
+      .subscribe({
+        next:(parametrosRuta) => {
+          console.log(parametrosRuta)
+          this.idUsuario = parametrosRuta['idCliente'];
+          //console.log('Usuario Sidebar: ', this.idUsuario)
+        }
+      })
+
   }
 
   actualizarProductos(categoria: any) {
     this.router.navigate(
-      ['/cliente', 'home'],
+      ['/cliente', this.idUsuario, 'home'],
       {
         queryParams: {
           categoria: categoria

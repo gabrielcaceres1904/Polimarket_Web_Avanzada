@@ -1,15 +1,133 @@
 import { Component, OnInit } from '@angular/core';
+import {GlobalDataService} from "../../../servicios/global/global-data.service";
+import {CompraCarritoInterface} from "../../../servicios/interfaces/app/compra-carrito.interface";
+import {PedidoService} from "../../../servicios/http/pedido.service";
+import {PedidoDetalleService} from "../../../servicios/http/pedidoDetalle.service";
+import {PedidoInterface} from "../../../servicios/interfaces/modelo/pedido.interface";
+import { DatePipe } from '@angular/common';
+import {PedidoDetalleCreateInterface} from "../../../servicios/interfaces/create/pedido-detalleCreate.interface";
+import {PedidoCreateInterface} from "../../../servicios/interfaces/create/pedidoCreate.interface";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ModalComponent} from "../../../componentes/modal/modal.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalPagoComponent} from "../../../componentes/modal-pago/modal-pago.component";
 
 @Component({
   selector: 'app-ruta-carrito',
   templateUrl: './ruta-carrito.component.html',
-  styleUrls: ['./ruta-carrito.component.scss']
+  styleUrls: ['./ruta-carrito.component.scss'],
+  providers: [DatePipe]
 })
 export class RutaCarritoComponent implements OnInit {
 
-  constructor() { }
+  prefix = 'https://bit.ly/'
+  compras: CompraCarritoInterface[] = []
+  subtotal = 0
+  iva = 0.12
+  estadoPendiente = 'Pendiente'
 
-  ngOnInit(): void {
+  idUsuario = -1
+
+  constructor(private readonly pedidoService: PedidoService,
+              private readonly router: Router,
+              private readonly pedidoDetalleService: PedidoDetalleService,
+              private datePipe: DatePipe,
+              private readonly activatedRoute: ActivatedRoute,
+              public dialog: MatDialog) {
+    // @ts-ignore
+    this.compras = GlobalDataService.comprasCarrito
+    for(let compra of this.compras){
+      this.subtotal += compra.producto.precio * compra.cantidad
+    }
+
   }
 
+  ngOnInit(): void {
+    // @ts-ignore
+    const parametroRuta$ = this.activatedRoute.parent.params;
+    parametroRuta$
+      .subscribe({
+        next:(parametrosRuta) => {
+          //console.log(parametrosRuta)
+          this.idUsuario = parametrosRuta['idCliente'];
+          //console.log('Usuario Sidebar: ', this.idUsuario)
+        }
+      })
+  }
+
+  verificarTarjetas(){
+
+  }
+
+  ingresarTarjeta(){
+    const referenciaDialogo = this.dialog.open(
+      ModalPagoComponent,
+      {
+        disableClose: false,
+      }
+    )
+    const despuesCerrado$ = referenciaDialogo.afterClosed()
+    despuesCerrado$
+      .subscribe(
+        (datos) => {
+          console.log(datos['tarjeta'])
+          if(datos!=undefined){
+            const tarjeta = datos['tarjeta']
+
+          }
+        }
+      )
+  }
+
+  registrarPedido() {
+    //const todayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    const pedidoNuevo = {
+      fechaPedido: new Date(),
+      estado: this.estadoPendiente,
+      idUsuario: this.idUsuario
+    } as PedidoCreateInterface
+    this.pedidoService.crear(pedidoNuevo)
+      .subscribe(
+        {
+          next: (data) => {
+            console.log(data)
+            const usuarioCreado = data as PedidoInterface
+            const idPedido = usuarioCreado.idPedido
+            for(let compra of this.compras){
+              const detallePedido = {
+                cantidad: compra.cantidad,
+                valorTotal: compra.producto.precio * compra.cantidad,
+                idPedido: idPedido,
+                idProducto: compra.producto.idProducto
+              } as PedidoDetalleCreateInterface
+              // Crear Rol Usuario
+              this.pedidoDetalleService.crear(detallePedido)
+                .subscribe(
+                  {
+                    next: (data) => {
+                      console.log(data)
+                    },
+                    error: (error) => {
+                      console.error(error)
+                    }
+                  }
+                )
+            }
+          },
+          error: (error) => {
+            console.error(error)
+          },
+          complete: () => {
+            this.compras = []
+          }
+        }
+      )
+
+  }
+
+  actualizarTotales() {
+    for(let compra of this.compras){
+      this.subtotal += compra.producto.precio * compra.cantidad
+    }
+  }
 }
