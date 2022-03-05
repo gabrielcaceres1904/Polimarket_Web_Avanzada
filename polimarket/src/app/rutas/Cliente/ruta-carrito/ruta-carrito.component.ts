@@ -15,6 +15,7 @@ import {TarjetaService} from "../../../servicios/http/tarjeta.service";
 import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
 import {OfertaBoxInterface} from "../../../servicios/interfaces/app/oferta-box.interface";
 import {TarjetaInterface} from "../../../servicios/interfaces/modelo/tarjeta.interface";
+import {TarjetaCreateInterface} from "../../../servicios/interfaces/create/tarjetaCreate.interface";
 
 @Component({
   selector: 'app-ruta-carrito',
@@ -90,8 +91,9 @@ export class RutaCarritoComponent implements OnInit {
             if(!this.tieneTarjetas){
               this.desplegarModal()
             }else{
-              this.desplegarModal()
+              //this.desplegarModal()
               console.log('Ya tiene una o más tarjetas')
+              this.registrarPedido()
             }
           }
         }
@@ -114,7 +116,9 @@ export class RutaCarritoComponent implements OnInit {
         (datos) => {
           console.log(datos)
           if(datos!=undefined){
-            const tarjeta = datos['tarjeta']
+            const tarjeta = datos['tarjeta'] as TarjetaCreateInterface
+            console.log(tarjeta)
+            //this.tarjetaService.crear(tarjeta)
           }
         }
       )

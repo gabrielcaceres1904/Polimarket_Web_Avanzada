@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <td>Total: </td>
-          <td>${{subtotal * iva}}</td>
+          <td>${{subtotal * (1 + iva)}}</td>
         </tr>
       </table>
       <button class="btn btn-primary btn-lg col-md-12 text-white" (click)="verificarTarjetas()">Comprar</button>
