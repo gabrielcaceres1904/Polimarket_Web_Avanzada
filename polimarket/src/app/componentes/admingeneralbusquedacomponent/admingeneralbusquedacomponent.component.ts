@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ModalRegistrocuentaComponent} from "../modal-registrocuenta/modal-registrocuenta.component";
+import { Router} from "@angular/router";
+import {GlobalDataService} from "../../servicios/global/global-data.service";
 
 @Component({
   selector: 'app-admingeneralbusquedacomponent',
@@ -10,10 +12,22 @@ import {ModalRegistrocuentaComponent} from "../modal-registrocuenta/modal-regist
 export class AdmingeneralbusquedacomponentComponent implements OnInit {
 
   constructor(
-    public dialog:MatDialog
+    public dialog:MatDialog,
+    private readonly router:Router
   ) { }
 
   ngOnInit(): void {
+  }
+  botonBuscar(){
+   const busqueda = <HTMLInputElement> document.getElementById("busquedaCuenta")
+    let valorBusqueda = busqueda.value
+    if(valorBusqueda!=""){
+      if(GlobalDataService.administradorGeneral.idUsuario){
+        this.router.navigate(['/admin-general',GlobalDataService.administradorGeneral.idUsuario,'cuentas',GlobalDataService.administradorGeneral.idUsuario,valorBusqueda]);
+      }else{
+        this.router.navigate(['/admin-general',0,'cuentas',0,valorBusqueda]);
+      }
+    }
   }
   botonNuevo(){
     this.dialog.open(ModalRegistrocuentaComponent,{

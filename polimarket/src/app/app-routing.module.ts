@@ -72,6 +72,10 @@ const routes: Routes = [
         component:RutaCuentasComponent
       },
       {
+        path:'cuentas/:idAdminGeneral/:user',
+        component:RutaCuentasComponent
+      },
+      {
         path:'productos',
         component:RutaProductosComponent
       },

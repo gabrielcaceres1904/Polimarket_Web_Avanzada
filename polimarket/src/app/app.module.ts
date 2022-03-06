@@ -67,7 +67,7 @@ import {NgChartsModule} from "ng2-charts";
     RutaAdmingeneralPerfilComponent,
     AdmingeneralbusquedacomponentComponent,
     ModalRegistrocuentaComponent,
-    ModalEliminarcuentaComponent
+    ModalEliminarcuentaComponent,
     ModalPagoComponent,
     LineChartComponent,
     DoughnutChartComponent
