@@ -4,6 +4,7 @@ import {UsuarioService} from "../../../servicios/http/usuario.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {baseControlInterface} from "../../../servicios/interfaces/app/base-control.interface";
 import {UsuarioInterface} from "../../../servicios/interfaces/modelo/usuario.interface";
+import {TarjetaInterface} from "../../../servicios/interfaces/modelo/tarjeta.interface";
 
 @Component({
   selector: 'app-ruta-perfil',
@@ -31,6 +32,9 @@ export class RutaPerfilComponent implements OnInit {
       titulo: 'Correo electrónico', nombre: 'email', tipo: 'text', placeholder: 'Ingresa tu correo electrónico', requeridoM: 'El correo electrónico es requerido', longitudM: ''
     },
   ] as baseControlInterface[]
+
+  tarjetasUsuario: TarjetaInterface[] = []
+  tarjetaSeleccionada = ''
 
   constructor(private readonly router: Router,
               private readonly activatedRoute: ActivatedRoute,
@@ -151,5 +155,13 @@ export class RutaPerfilComponent implements OnInit {
   volver() {
     const ruta = ['/cliente', this.usuarioActual.idUsuario, 'home'];
     this.router.navigate(ruta);
+  }
+
+  cambiarPassword() {
+
+  }
+
+  selectChangeHandler (event: any) {
+    this.tarjetaSeleccionada = event.target.value;
   }
 }

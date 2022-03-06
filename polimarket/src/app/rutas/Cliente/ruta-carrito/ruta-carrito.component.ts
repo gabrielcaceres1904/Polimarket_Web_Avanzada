@@ -16,6 +16,8 @@ import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.i
 import {OfertaBoxInterface} from "../../../servicios/interfaces/app/oferta-box.interface";
 import {TarjetaInterface} from "../../../servicios/interfaces/modelo/tarjeta.interface";
 import {TarjetaCreateInterface} from "../../../servicios/interfaces/create/tarjetaCreate.interface";
+import {UsuarioInterface} from "../../../servicios/interfaces/modelo/usuario.interface";
+import {UsuarioRolCreateInterface} from "../../../servicios/interfaces/create/usuarioRolCreate.interface";
 
 @Component({
   selector: 'app-ruta-carrito',
@@ -117,8 +119,22 @@ export class RutaCarritoComponent implements OnInit {
           console.log(datos)
           if(datos!=undefined){
             const tarjeta = datos['tarjeta'] as TarjetaCreateInterface
-            console.log(tarjeta)
-            //this.tarjetaService.crear(tarjeta)
+            //console.log(tarjeta)
+            this.tarjetaService.crear(tarjeta)
+              .subscribe(
+                {
+                  next: (data) => {
+                    console.log(data)
+
+                  },
+                  error: (error) => {
+                    console.error(error)
+                  },
+                  complete: () => {
+                    this.registrarPedido()
+                  }
+                }
+              )
           }
         }
       )

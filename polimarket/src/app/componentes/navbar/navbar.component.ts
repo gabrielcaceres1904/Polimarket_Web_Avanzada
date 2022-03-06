@@ -46,4 +46,9 @@ export class NavbarComponent implements OnInit {
     const ruta = ['/login'];
     this.router.navigate(ruta);
   }
+
+  volverHome() {
+    const ruta = ['/cliente', this.idUsuario, 'home'];
+    this.router.navigate(ruta);
+  }
 }
