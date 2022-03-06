@@ -28,6 +28,9 @@ import { RutaResumenComponent } from './rutas/Cliente/ruta-resumen/ruta-resumen.
 import { ModalPagoComponent } from './componentes/modal-pago/modal-pago.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { LineChartComponent } from './componentes/line-chart/line-chart.component';
+import { DoughnutChartComponent } from './componentes/doughnut-chart/doughnut-chart.component';
+import {NgChartsModule} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -48,7 +51,9 @@ import {MatNativeDateModule} from "@angular/material/core";
     ModalComponent,
     RutaPerfilComponent,
     RutaResumenComponent,
-    ModalPagoComponent
+    ModalPagoComponent,
+    LineChartComponent,
+    DoughnutChartComponent
   ],
     imports: [
         BrowserModule,
@@ -61,7 +66,8 @@ import {MatNativeDateModule} from "@angular/material/core";
         MatFormFieldModule,
         MatInputModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        NgChartsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
