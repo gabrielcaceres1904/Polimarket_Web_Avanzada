@@ -41,6 +41,7 @@ import { DoughnutChartComponent } from './componentes/doughnut-chart/doughnut-ch
 import {NgChartsModule} from "ng2-charts";
 import { AdmingeneralbusqproductosComponent } from './componentes/admingeneralbusqproductos/admingeneralbusqproductos.component';
 import { ModalRegistroproductoComponent } from './componentes/modal-registroproducto/modal-registroproducto.component';
+import { ModalConfirmareliminarproductoComponent } from './componentes/modal-confirmareliminarproducto/modal-confirmareliminarproducto.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ModalRegistroproductoComponent } from './componentes/modal-registroprod
     LineChartComponent,
     DoughnutChartComponent,
     AdmingeneralbusqproductosComponent,
-    ModalRegistroproductoComponent
+    ModalRegistroproductoComponent,
+    ModalConfirmareliminarproductoComponent
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,18 @@
+
+<div class="container-fluid" style="padding-top: 60px;"></div>
+<h1
+  mat-dialog-title
+  class="d-flex justify-content-center"
+  style="color: #40BFFF; font-family: Poppins"
+>
+  Mensaje de Confirmación
+</h1>
+
+<div class="h5 px-4" style="font-family: Poppins">Estimado Usuario, ¿Está Seguro Que Desea Eliminar El Producto? Si lo hace los cambios no se pueden revertir.</div>
+  <div mat-dialog-actions class="d-flex justify-content-center">
+    <button class="btn btn-primary btn-lg" style="margin: 0px 20px;border: 0;color:white;background: #33A0FF" (click)="confirmar()">Confirmar</button>
+    <button class="btn btn-primary btn-lg" style="margin: 0px 20px;border: 1px solid #40BFFF;color:#40BFFF;background: #F6F7F8" (click)="eliminar()">Cancelar</button>
+  </div>
+
+
+

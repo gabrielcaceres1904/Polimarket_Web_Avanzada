@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
 import {ProductoService} from "../../../servicios/http/producto.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalComponent} from "../../../componentes/modal/modal.component";
+import {ModalConfirmareliminarproductoComponent} from "../../../componentes/modal-confirmareliminarproducto/modal-confirmareliminarproducto.component";
 
 @Component({
   selector: 'app-ruta-productos',
@@ -12,7 +15,8 @@ export class RutaProductosComponent implements OnInit {
   listaProductos:ProductoInterface[]=[]
   constructor(
     private readonly activatedRoute:ActivatedRoute,
-    private readonly productoServices:ProductoService
+    private readonly productoServices:ProductoService,
+    public dialog:MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -52,10 +56,16 @@ export class RutaProductosComponent implements OnInit {
         }
       )
   }
-  actualizarProducto(){
+  actualizarProducto(producto:ProductoInterface){
 
   }
-  eliminarProducto(){
+  eliminarProducto(idProducto:number){
+    this.dialog.open(ModalConfirmareliminarproductoComponent,
+      {
+        data:idProducto,
+        width:"60%",
+        height:"80%"
+      })
 
   }
 }
