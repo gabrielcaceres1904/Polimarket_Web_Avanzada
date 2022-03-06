@@ -37,11 +37,15 @@ export class SidebaradmingeneralComponent implements OnInit {
   }
   actualizarProductos(categoria: any) {
     console.log("categoria", typeof categoria)
+    let idUsuario=0;
+    if(GlobalDataService.usuarioActual.idUsuario){
+      idUsuario=GlobalDataService.administradorGeneral.idUsuario;
+    }
     if(categoria===1){
-      this.router.navigate(['/admin-general',GlobalDataService.usuarioActual.idUsuario,"cuentas"]);
+      this.router.navigate(['/admin-general',idUsuario,"cuentas"]);
     }
     if(categoria===2){
-      this.router.navigate(['/admin-general',GlobalDataService.usuarioActual.idUsuario,"productos"]);
+      this.router.navigate(['/admin-general',idUsuario,"productos"]);
     }
   }
 }

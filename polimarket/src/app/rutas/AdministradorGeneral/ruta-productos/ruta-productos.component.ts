@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
+import {ProductoService} from "../../../servicios/http/producto.service";
 
 @Component({
   selector: 'app-ruta-productos',
@@ -7,12 +9,14 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./ruta-productos.component.scss']
 })
 export class RutaProductosComponent implements OnInit {
-
+  listaProductos:ProductoInterface[]=[]
   constructor(
-    private readonly activatedRoute:ActivatedRoute
+    private readonly activatedRoute:ActivatedRoute,
+    private readonly productoServices:ProductoService
   ) { }
 
   ngOnInit(): void {
+    this.llenarProductos()
     const parametrosConsulta$ = this.activatedRoute.queryParams;
     parametrosConsulta$.subscribe(
       {
@@ -30,4 +34,28 @@ export class RutaProductosComponent implements OnInit {
     )
   }
 
+  llenarProductos(){
+    this.productoServices.buscarTodos("")
+      .subscribe(
+        {
+          next:(data)=>{
+            if(data){
+              this.listaProductos=data;
+            }
+          },
+          error:(error)=>{
+            console.log(error)
+          },
+          complete:()=>{
+
+          }
+        }
+      )
+  }
+  actualizarProducto(){
+
+  }
+  eliminarProducto(){
+
+  }
 }

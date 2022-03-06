@@ -39,6 +39,8 @@ import { ModalEliminarcuentaComponent } from './componentes/modal-eliminarcuenta
 import { LineChartComponent } from './componentes/line-chart/line-chart.component';
 import { DoughnutChartComponent } from './componentes/doughnut-chart/doughnut-chart.component';
 import {NgChartsModule} from "ng2-charts";
+import { AdmingeneralbusqproductosComponent } from './componentes/admingeneralbusqproductos/admingeneralbusqproductos.component';
+import { ModalRegistroproductoComponent } from './componentes/modal-registroproducto/modal-registroproducto.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import {NgChartsModule} from "ng2-charts";
     ModalEliminarcuentaComponent,
     ModalPagoComponent,
     LineChartComponent,
-    DoughnutChartComponent
+    DoughnutChartComponent,
+    AdmingeneralbusqproductosComponent,
+    ModalRegistroproductoComponent
   ],
     imports: [
         BrowserModule,

@@ -1,1 +1,23 @@
-<p>ruta-productos works!</p>
+<div class="container-fluid">
+  <app-admingeneralbusqproductos></app-admingeneralbusqproductos>
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th>PRODUCTO</th>
+        <th></th>
+        <th>PRECIO</th>
+        <th>CÓDIGO</th>
+        <th>OPCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of listaProductos; let indice = index">
+        <td><img src="https://bit.ly/{{producto.codigo}}" class="img-fluid" width="80px" height="100px"></td>
+        <td><span>{{producto.nombre}}</span></td>
+        <td>${{producto.precio}}</td>
+        <td>{{producto.codigo}}</td>
+        <td ><a (click)="actualizarProducto()"><span class="bi bi-pencil-fill" style="padding-right: 5px"></span> </a>  <a (click)="eliminarProducto()"><span class="bi bi-trash-fill" id="eliminar" ></span></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
