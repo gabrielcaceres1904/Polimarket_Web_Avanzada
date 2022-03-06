@@ -36,6 +36,9 @@ import { RutaAdmingeneralPerfilComponent } from './rutas/AdministradorGeneral/ru
 import { AdmingeneralbusquedacomponentComponent } from './componentes/admingeneralbusquedacomponent/admingeneralbusquedacomponent.component';
 import { ModalRegistrocuentaComponent } from './componentes/modal-registrocuenta/modal-registrocuenta.component';
 import { ModalEliminarcuentaComponent } from './componentes/modal-eliminarcuenta/modal-eliminarcuenta.component';
+import { LineChartComponent } from './componentes/line-chart/line-chart.component';
+import { DoughnutChartComponent } from './componentes/doughnut-chart/doughnut-chart.component';
+import {NgChartsModule} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -65,6 +68,9 @@ import { ModalEliminarcuentaComponent } from './componentes/modal-eliminarcuenta
     AdmingeneralbusquedacomponentComponent,
     ModalRegistrocuentaComponent,
     ModalEliminarcuentaComponent
+    ModalPagoComponent,
+    LineChartComponent,
+    DoughnutChartComponent
   ],
     imports: [
         BrowserModule,
@@ -77,7 +83,8 @@ import { ModalEliminarcuentaComponent } from './componentes/modal-eliminarcuenta
         MatFormFieldModule,
         MatInputModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        NgChartsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
