@@ -8,5 +8,5 @@ import {UsuarioInterface} from "../interfaces/modelo/usuario.interface";
 export class GlobalDataService {
   public static comprasCarrito: CompraCarritoInterface[] = []
   public static usuarioActual: UsuarioInterface = {} as UsuarioInterface
-
+  public static administradorGeneral:UsuarioInterface={} as UsuarioInterface
 }

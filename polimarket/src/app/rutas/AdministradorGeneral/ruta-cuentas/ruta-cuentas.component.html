@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <app-admingeneralbusquedacomponent></app-admingeneralbusquedacomponent>
+    <table class="table table-borderless ">
+      <thead>
+      <tr>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">APELLIDO</th>
+        <th scope="col">DIRECCION</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">CONTRASEÑA</th>
+        <th scope="col">OPCIONES</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let usuario of listaUsuarios;let indice=index">
+        <td >{{usuario.nombre}}</td>
+        <td >{{usuario.apellido}}</td>
+        <td >{{usuario.direccion}}</td>
+        <td >{{usuario.email}}</td>
+        <td >{{usuario.password}}</td>
+        <td ><a (click)="actualizarUsuario(usuario)"><span class="bi bi-pencil-fill" style="padding-right: 5px"></span> </a>  <a (click)="eliminarCuenta(usuario.idUsuario)"><span class="bi bi-trash-fill" id="eliminar" ></span></a></td>
+      </tr>
+      </tbody>
+    </table>
+
+
+</div>

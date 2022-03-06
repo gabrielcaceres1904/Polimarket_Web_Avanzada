@@ -117,7 +117,8 @@ export class RutaLoginComponent implements OnInit {
                               const ruta = ['/admin'];
                               this.router.navigate(ruta);
                             }else if(tipoUsuario === 3){
-                              const ruta = ['/admin-general'];
+                              GlobalDataService.administradorGeneral=this.usuarioValidado;
+                              const ruta = ['/admin-general',this.usuarioValidado.idUsuario,'home'];
                               this.router.navigate(ruta);
                             }
                           }

@@ -1,1 +1,18 @@
-<p>ruta-home-admin-general works!</p>
+<app-navbaradmingeneral></app-navbaradmingeneral>
+<div class="container-fluid" >
+  <div class="row">
+    <div
+      class="col-3"
+      style="background: #f6f7f8;
+    margin:10px 25px 10px 25px">
+      <app-sidebaradmingeneral [tituloSideBar]="tituloAdminGeneral" [categories]="categories" ></app-sidebaradmingeneral>
+    </div>
+    <div class="col-8 pb-5 mb-5">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-5" style="background: #BCDDFE">
+  <app-footer></app-footer>
+</div>

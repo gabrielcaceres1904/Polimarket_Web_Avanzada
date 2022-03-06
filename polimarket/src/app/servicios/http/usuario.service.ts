@@ -55,7 +55,7 @@ export class UsuarioService {
       );
   }
 
-  actualizarPorId(idUsuario:number, datosActualizar: UsuarioCreateInterface): Observable<UsuarioInterface>{
+  actualizarPorId(idUsuario:number, datosActualizar: UsuarioInterface): Observable<UsuarioInterface>{
     return this.httpClient.put(this.url  + '/' + idUsuario, datosActualizar)
       .pipe(
         map(

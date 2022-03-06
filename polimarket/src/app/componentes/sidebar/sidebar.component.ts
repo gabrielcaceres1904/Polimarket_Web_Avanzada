@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {GlobalDataService} from "../../servicios/global/global-data.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,15 +8,15 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
-
+  @Input()
+  tituloSideBar="Categorías"
   @Input()
   categories: {
     idCategoria: number,
     categoria: string,
     cantProductos: number
   }[] = []
-
+@Input()
   categorias=[
     {
       categoria:"Lacteos",
@@ -96,6 +97,7 @@ export class SidebarComponent implements OnInit {
   }
 
   actualizarProductos(categoria: any) {
+    if(GlobalDataService.usuarioActual)
     this.router.navigate(
       ['/cliente', this.idUsuario, 'home'],
       {

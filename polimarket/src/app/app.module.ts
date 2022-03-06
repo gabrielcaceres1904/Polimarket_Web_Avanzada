@@ -28,6 +28,14 @@ import { RutaResumenComponent } from './rutas/Cliente/ruta-resumen/ruta-resumen.
 import { ModalPagoComponent } from './componentes/modal-pago/modal-pago.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { RutaCuentasComponent } from './rutas/AdministradorGeneral/ruta-cuentas/ruta-cuentas.component';
+import { RutaProductosComponent } from './rutas/AdministradorGeneral/ruta-productos/ruta-productos.component';
+import { SidebaradmingeneralComponent } from './componentes/sidebaradmingeneral/sidebaradmingeneral.component';
+import { NavbaradmingeneralComponent } from './componentes/navbaradmingeneral/navbaradmingeneral.component';
+import { RutaAdmingeneralPerfilComponent } from './rutas/AdministradorGeneral/ruta-admingeneral-perfil/ruta-admingeneral-perfil.component';
+import { AdmingeneralbusquedacomponentComponent } from './componentes/admingeneralbusquedacomponent/admingeneralbusquedacomponent.component';
+import { ModalRegistrocuentaComponent } from './componentes/modal-registrocuenta/modal-registrocuenta.component';
+import { ModalEliminarcuentaComponent } from './componentes/modal-eliminarcuenta/modal-eliminarcuenta.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +56,15 @@ import {MatNativeDateModule} from "@angular/material/core";
     ModalComponent,
     RutaPerfilComponent,
     RutaResumenComponent,
-    ModalPagoComponent
+    ModalPagoComponent,
+    RutaCuentasComponent,
+    RutaProductosComponent,
+    SidebaradmingeneralComponent,
+    NavbaradmingeneralComponent,
+    RutaAdmingeneralPerfilComponent,
+    AdmingeneralbusquedacomponentComponent,
+    ModalRegistrocuentaComponent,
+    ModalEliminarcuentaComponent
   ],
     imports: [
         BrowserModule,
