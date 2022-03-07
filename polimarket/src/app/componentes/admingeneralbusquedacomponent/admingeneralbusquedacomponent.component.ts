@@ -23,10 +23,21 @@ export class AdmingeneralbusquedacomponentComponent implements OnInit {
     let valorBusqueda = busqueda.value
     if(valorBusqueda!=""){
       if(GlobalDataService.administradorGeneral.idUsuario){
-        this.router.navigate(['/admin-general',GlobalDataService.administradorGeneral.idUsuario,'cuentas',GlobalDataService.administradorGeneral.idUsuario,valorBusqueda]);
+        this.router.navigate(['/admin-general',GlobalDataService.administradorGeneral.idUsuario,'cuentas'],
+          {queryParams:{
+              nombre:valorBusqueda
+            }
+          });
       }else{
-        this.router.navigate(['/admin-general',0,'cuentas',0,valorBusqueda]);
+        this.router.navigate(['/admin-general',0,'cuentas'],
+          {
+            queryParams:{
+              nombre:valorBusqueda
+            }
+          });
       }
+    }else{
+      this.router.navigate(['/admin-general',0,'cuentas']);
     }
   }
   botonNuevo(){

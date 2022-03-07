@@ -1,1 +1,64 @@
-<p>modal-actualizarproducto works!</p>
+
+<div class="container-fluid" style="padding-top: 60px;"></div>
+<h1
+  mat-dialog-title
+  class="d-flex justify-content-center"
+  style="color: #40BFFF; font-family: Poppins"
+>
+  Actualizar Producto
+</h1>
+<form [formGroup]="formGroup" class="px-5" >
+  <div class="mb-3 row">
+    <label for="nombre" class="col-md-2 col-form-label">Producto:</label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        class="form-control"
+        id="nombre"
+        formControlName="nombre"
+      >
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="precio" class="col-sm-2 col-form-label">Precio($):</label>
+    <div class="col-sm-10">
+      <input
+        type="number"
+        class="form-control"
+        id="precio"
+        formControlName="precio"
+      >
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="categoria" class="col-sm-2 col-form-label">Categoría:</label>
+    <div class="col-sm-10">
+      <select
+        class="form-control"
+        id="categoria"
+        formControlName="categoria"
+      >
+        <option *ngFor="let categoria of arrayCategorias; let indice=index" value="{{indice}}">{{categoria.nombre}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="imagen" class="col-sm-2 col-form-label">Imagen:</label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        class="form-control"
+        id="imagen"
+        formControlName="imagen"
+      >
+      <small id="helpImagen" class="form-text text-muted">
+        Ingresar el link de una imagen recortado por el acortador <a href="https://bitly.com/">bitly</a>.
+      </small>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="d-flex justify-content-center">
+    <button class="btn btn-primary btn-lg" style="margin: 0px 20px;border: 0;color:white;background: #33A0FF" (click)="actualizarProducto()">Actualizar</button>
+  </div>
+</form>
+
