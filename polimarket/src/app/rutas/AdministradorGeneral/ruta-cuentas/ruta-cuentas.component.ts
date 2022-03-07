@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {UsuarioService} from "../../../servicios/http/usuario.service";
 import {UsuarioInterface} from "../../../servicios/interfaces/modelo/usuario.interface";
 import {MatDialog} from "@angular/material/dialog";
-import {ModalRegistrocuentaComponent} from "../../../componentes/modal-registrocuenta/modal-registrocuenta.component";
+// import {ModalRegistrocuentaComponent} from "../../../componentes/modal-registrocuenta/modal-registrocuenta.component";
 import {UsuarioRolService} from "../../../servicios/http/usuario-rol.service";
 import {UsuarioRolInterface} from "../../../servicios/interfaces/modelo/usuario-rol.interface";
 import {ActivatedRoute, Router} from "@angular/router";
 import {GlobalDataService} from "../../../servicios/global/global-data.service";
 import {ModalEliminarcuentaComponent} from "../../../componentes/modal-eliminarcuenta/modal-eliminarcuenta.component";
+// import {ModalEliminarcuentaComponent} from "../../../componentes/modal-eliminarcuenta/modal-eliminarcuenta.component";
 
 @Component({
   selector: 'app-ruta-cuentas',

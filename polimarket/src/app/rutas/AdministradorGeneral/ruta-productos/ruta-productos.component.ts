@@ -3,7 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
 import {ProductoService} from "../../../servicios/http/producto.service";
 import {MatDialog} from "@angular/material/dialog";
-import {ModalComponent} from "../../../componentes/modal/modal.component";
+// import {ModalComponent} from "../../../componentes/modal/modal.component";
 import {ModalConfirmareliminarproductoComponent} from "../../../componentes/modal-confirmareliminarproducto/modal-confirmareliminarproducto.component";
 
 @Component({

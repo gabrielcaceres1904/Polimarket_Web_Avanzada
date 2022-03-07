@@ -6,9 +6,9 @@ import {CategoriaService} from "../../../servicios/http/categoria.service";
 import {CategoriaInterface} from "../../../servicios/interfaces/modelo/categoria.interface";
 import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
 import {MatDialog} from "@angular/material/dialog";
-import {ModalComponent} from "../../../componentes/modal/modal.component";
 import {CompraCarritoInterface} from "../../../servicios/interfaces/app/compra-carrito.interface";
 import {GlobalDataService} from "../../../servicios/global/global-data.service";
+import {ModalComponent} from "../../../componentes/modal/modal.component";
 
 
 @Component({
