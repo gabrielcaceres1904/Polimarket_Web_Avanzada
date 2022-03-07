@@ -110,7 +110,8 @@ export class RutaListaProductosComponent implements OnInit {
                     this.carrito.push(
                       {
                         producto: this.productoSeleccionado,
-                        cantidad: Number.parseInt(datos['cantidad'])
+                        cantidad: Number.parseInt(datos['cantidad']),
+                        stock: Number.parseInt(datos['stock'])
                       }
                     )
                     console.log(this.carrito)
@@ -199,13 +200,17 @@ export class RutaListaProductosComponent implements OnInit {
                     next: (datos) => { // try then
                       const producto = datos as ProductoInterface
                       if(producto.idCategoria === categoria){
+                        let valorSoldOut = true
+                        if(productoSucursal.stock != 0){
+                          valorSoldOut = false
+                        }
                         ofertasCategoria.push(
                           {
                             nombre: producto.nombre,
                             idProducto: producto.idProducto,
                             url: this.prefix + producto.codigo,
                             precio: producto.precio,
-                            soldOut: false, // TODO
+                            soldOut: valorSoldOut,
                             stock: productoSucursal.stock
                           }
                         )

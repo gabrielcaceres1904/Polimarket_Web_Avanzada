@@ -186,4 +186,8 @@ export class RutaCarritoComponent implements OnInit {
       this.subtotal += compra.producto.precio * compra.cantidad
     }
   }
+
+  eliminarCompra(compra: any) {
+    
+  }
 }

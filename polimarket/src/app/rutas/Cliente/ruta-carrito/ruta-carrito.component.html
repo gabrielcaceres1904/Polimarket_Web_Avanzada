@@ -10,6 +10,7 @@
         <th scope="col">Precio Unitario</th>
         <th scope="col">Cantidad</th>
         <th scope="col">Valor Total</th>
+        <th scope="col">Eliminar Compra</th>
       </tr>
       </thead>
       <tbody>
@@ -22,9 +23,10 @@
         </td>
         <td>${{compra.producto.precio}}</td>
         <td>
-          <input type="number" min="1" value="{{compra.cantidad}}" (change)="actualizarTotales()" [(ngModel)]="compra.cantidad">
+          <input type="number" min="1" max="{{compra.stock}}" value="{{compra.cantidad}}" (change)="actualizarTotales()" [(ngModel)]="compra.cantidad">
         </td>
         <td>${{compra.producto.precio * compra.cantidad}}</td>
+        <td (click)="eliminarCompra(compra)">{{compra.stock}}</td>
       </tr>
       </tbody>
     </table>

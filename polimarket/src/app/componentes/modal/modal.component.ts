@@ -24,7 +24,7 @@ export class ModalComponent implements OnInit {
   }
 
   agregarProducto(){
-    this.dialogRef.close({cantidad: this.cantidad})
+    this.dialogRef.close({cantidad: this.cantidad, stock: this.data.stock})
   }
 
   cancelar() {
