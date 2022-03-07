@@ -188,6 +188,6 @@ export class RutaCarritoComponent implements OnInit {
   }
 
   eliminarCompra(compra: any) {
-    
+
   }
 }
