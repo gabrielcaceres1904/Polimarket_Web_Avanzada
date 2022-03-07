@@ -80,6 +80,10 @@ const routes: Routes = [
         component:RutaProductosComponent
       },
       {
+        path:'productos/:nombreProducto',
+        component:RutaProductosComponent
+      },
+      {
         path:'perfil',
         component:RutaAdmingeneralPerfilComponent
       }

@@ -13,6 +13,7 @@ import {CategoriaInterface} from "../../servicios/interfaces/modelo/categoria.in
 })
 export class AdmingeneralbusqproductosComponent implements OnInit {
   arrayCategorias!:CategoriaInterface[];
+  buscarProd='';
   constructor(
     public dialog:MatDialog,
     private readonly router:Router,
@@ -45,7 +46,23 @@ export class AdmingeneralbusqproductosComponent implements OnInit {
       width:"60%"
     });
   }
+  actualizarParametrosDeConsultar(){
+    let valor = <HTMLInputElement> document.getElementById("busquedaCuenta");
+    this.buscarProd = valor.value;
+    console.log("buscar prod = ", this.buscarProd);
+    if(this.buscarProd){
+      this.router.navigate(['/admin-general', 0,'productos'],
+        {
+          queryParams: {
+            nombreProducto: this.buscarProd//?name=david
+          }
+        }
+      );
+    }else{
+      this.router.navigate(['/admin-general', 0,'productos']);
+    }
+  }
   botonBuscar(){
-
+    this.actualizarParametrosDeConsultar();
   }
 }

@@ -30,32 +30,26 @@ export class RutaCuentasComponent implements OnInit {
   ngOnInit(): void {
     // let param = ""
     // let idUsuario = ""
-    const parametros$ = this.activatedRoute.queryParams.subscribe(
-      params=>{
-        const param =this.activatedRoute.snapshot.paramMap.get("user");
-        const idUsuario=this.activatedRoute.snapshot.paramMap.get("idAdminGeneral");
-        console.log("entrando a params")
-        console.log("param",param);
-        console.log("user aqui", idUsuario);
-        if(param){
-          this.busqueda=param;
-          this.buscarPorNombre(this.busqueda)
-        }else{
-          this.llenarUsuarios("")
+    const parametros$ = this.activatedRoute.queryParams;
+    parametros$.subscribe({
+      next:(queryParams)=>{
+        if(queryParams){
+          console.log(queryParams);
+          this.busqueda=queryParams["nombre"];
+          if(this.busqueda){
+            this.buscarPorNombre();
+          }else{
+            this.llenarUsuarios("");
+          }
         }
+      },
+      error:(error)=>{
+        console.log(error);
+      },
+      complete:()=>{
+
       }
-      // {
-      //   next:(data)=>{
-      //
-      //   },
-      //   error:(error)=>{
-      //     console.log(error);
-      //   },
-      //   complete:()=>{
-      //
-      //   }
-      // }
-    )
+    })
 
 
   }
@@ -70,25 +64,25 @@ export class RutaCuentasComponent implements OnInit {
       }
     );
   }
-  buscarPorNombre(nombre:string){
-    //llenando lista con todos los usuarios
-    this.llenarUsuarios("")
+  buscarPorNombre(){
     this.usersService.buscarTodos("").subscribe(
       {
         next:(data)=>{
           if(data){
+            let usersFind:UsuarioInterface[]=[];
             for(let usuario of data){
-              if(usuario.nombre.trim()===nombre.trim()){
-                let usersFind:UsuarioInterface[]=[];
+              console.log(usuario.nombre.trim());
+              if(usuario.nombre.trim()===this.busqueda.trim()){
                 usersFind.push(usuario);
                 this.listaUsuarios=usersFind;
+                this.busqueda='';
                 break;
               }
             }
           }
         },
         error:(error)=>{
-
+          console.log(error);
         },
         complete:()=>{
 

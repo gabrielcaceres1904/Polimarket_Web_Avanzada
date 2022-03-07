@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
 import {ProductoService} from "../../../servicios/http/producto.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -22,7 +22,8 @@ export class RutaProductosComponent implements OnInit {
     private readonly activatedRoute:ActivatedRoute,
     private readonly productoServices:ProductoService,
     public dialog:MatDialog,
-    private readonly categoriasService:CategoriaService
+    private readonly categoriasService:CategoriaService,
+    private readonly router:Router
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +33,12 @@ export class RutaProductosComponent implements OnInit {
       {
         next:(queryParams)=>{
           console.log(queryParams);
-          //this.categoriaSeleccionada = queryParams['categoria']
+          this.buscarProd = queryParams['nombreProducto'];
+          if(this.buscarProd){
+            this.buscarProducto();
+          }else{
+            this.llenarProductos();
+          }
           // if(this.categoriaSeleccionada != undefined){
           //   this.buscarProductos(Number.parseInt(this.categoriaSeleccionada))
           // }
@@ -95,7 +101,31 @@ export class RutaProductosComponent implements OnInit {
       })
 
   }
-  buscarProducto(){
 
+  buscarProducto(){
+    this.productoServices.buscarTodos('').
+      subscribe(
+      {
+        next:(data)=>{
+          if(data){
+            let productos:ProductoInterface[]=[];
+            for(let producto of data){
+              if(producto.nombre.trim()===this.buscarProd){
+                productos.push(producto);
+                this.listaProductos=productos;
+                this.buscarProd='';
+                break;
+              }
+            }
+          }
+        },
+        error:(error)=>{
+
+        },
+        complete:()=>{
+
+        }
+      }
+    )
   }
 }
