@@ -146,23 +146,4 @@ export class RutaLoginComponent implements OnInit {
       }
     )
   }
-
-  buscarUsuario(id:number){
-    /*
-    const buscarPeliculaId$ = this.peliculaService.buscarUno(id);
-    buscarPeliculaId$
-      .subscribe(
-        {
-          next: (data) => {
-            this.peliculaActual = data
-            this.prepararFormulario()
-          },
-          error: (error) => {
-            console.error(error)
-          }
-        }
-      )
-
-     */
-  }
 }
