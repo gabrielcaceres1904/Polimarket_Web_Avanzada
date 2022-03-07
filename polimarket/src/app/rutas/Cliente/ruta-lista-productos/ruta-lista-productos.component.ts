@@ -10,6 +10,7 @@ import {CompraCarritoInterface} from "../../../servicios/interfaces/app/compra-c
 import {GlobalDataService} from "../../../servicios/global/global-data.service";
 import {ModalComponent} from "../../../componentes/modal/modal.component";
 import {SucursalInterface} from "../../../servicios/interfaces/modelo/sucursal.interface";
+import {DetalleCategoriaInterface} from "../../../servicios/interfaces/app/detalleCategoria.interface";
 
 
 @Component({
@@ -22,13 +23,8 @@ export class RutaListaProductosComponent implements OnInit {
   // Lista de ofertas
   prefix = 'https://bit.ly/'
 
-  detalleCategorias: {
-    idCategoria: number,
-    categoria: string,
-    cantProductos: number
-  }[] = []
+  detalleCategorias: DetalleCategoriaInterface[] = []
   sucursales: SucursalInterface[] = [];
-  sucursalActual: SucursalInterface = {} as SucursalInterface
 
   ofertas:OfertaBoxInterface[] = []
   categoriaSeleccionada = -1
@@ -60,7 +56,6 @@ export class RutaListaProductosComponent implements OnInit {
           if(this.categoriaSeleccionada != undefined){
             this.buscarProductos(this.categoriaSeleccionada, this.sucursalSeleccionada)
           }
-
         },
         error: (error)=>{
           console.error(error)
@@ -125,6 +120,15 @@ export class RutaListaProductosComponent implements OnInit {
   }
 
   private buscarProductos(categoria: number, sucursalSeleccionada: number) {
+    sucursalSeleccionada = 0
+    if(sucursalSeleccionada === 0){
+      this.buscarTodosProductos(categoria)
+    }else{
+      this.buscarProductosPorSucursal(categoria, sucursalSeleccionada)
+    }
+  }
+
+  private buscarTodosProductos(categoria: number){
     this.productoService.buscarTodos({})
       .subscribe(
         {
@@ -138,7 +142,8 @@ export class RutaListaProductosComponent implements OnInit {
                     nombre: producto.nombre,
                     idProducto: producto.idProducto,
                     url: this.prefix + producto.codigo,
-                    precio: producto.precio
+                    precio: producto.precio,
+                    soldOut: false // TODO
                   }
                 )
               }
@@ -148,12 +153,20 @@ export class RutaListaProductosComponent implements OnInit {
           error: (error) => { // catch
             console.error({error});
           },
+          complete: () => {
+            this.buscarCategorias()
+          }
         }
       )
   }
 
+  private buscarProductosPorSucursal(categoria: number, sucursal: number){
+
+  }
+
   private buscarCategorias() {
     let categorias: CategoriaInterface[] = []
+    let detalles: DetalleCategoriaInterface[] = []
 
     // Buscar Categorias
     this.categoriaService.buscarTodos({})
@@ -176,7 +189,7 @@ export class RutaListaProductosComponent implements OnInit {
                         }
                       }
 
-                      this.detalleCategorias.push(
+                      detalles.push(
                         {
                           idCategoria: categorias[i].idCategoria,
                           categoria: categorias[i].nombre,
@@ -189,6 +202,9 @@ export class RutaListaProductosComponent implements OnInit {
                   error: (error) => { // catch
                     console.error({error});
                   },
+                  complete: () => {
+                    this.detalleCategorias = detalles
+                  }
                 }
               )
           },

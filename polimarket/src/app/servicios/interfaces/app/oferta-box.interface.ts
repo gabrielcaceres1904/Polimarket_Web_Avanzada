@@ -3,4 +3,5 @@ export interface OfertaBoxInterface {
   idProducto: number
   url: string
   precio: number
+  soldOut: boolean
 }

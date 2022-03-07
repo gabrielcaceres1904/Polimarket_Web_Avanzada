@@ -2,4 +2,5 @@
   <img src="{{formatoOferta.url}}" class="myImages">
   <span class="d-flex justify-content-center font-weight-bold nombreOferta">{{formatoOferta.nombre}}</span>
   <span class="d-flex justify-content-center font-italic precioOferta">Precio: ${{formatoOferta.precio}}</span>
+  <span *ngIf="sold0ut" class="d-flex justify-content-center font-italic soldOut">Sold out!</span>
 </div>
