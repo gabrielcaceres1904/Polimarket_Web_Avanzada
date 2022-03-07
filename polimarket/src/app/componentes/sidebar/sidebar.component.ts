@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
     parametrosConsulta$.subscribe(
       {
         next:(queryParams)=>{
-          console.log(queryParams);
+          //console.log(queryParams);
           if(queryParams['sucursal'] != undefined){
             this.sucursalSeleccionada = Number.parseInt(queryParams['sucursal'])
           }else{
