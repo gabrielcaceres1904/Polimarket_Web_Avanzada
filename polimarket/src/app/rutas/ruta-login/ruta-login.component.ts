@@ -112,7 +112,12 @@ export class RutaLoginComponent implements OnInit {
                             GlobalDataService.usuarioActual = this.usuarioValidado
                             if(tipoUsuario === 1){
                               const ruta = ['/cliente', this.usuarioValidado.idUsuario, 'home'];
-                              this.router.navigate(ruta);
+                              this.router.navigate(ruta,
+                                {
+                                  queryParams: {
+                                    sucursal: 1
+                                  }
+                                });
                             }else if(tipoUsuario === 2){
                               const ruta = ['/admin'];
                               this.router.navigate(ruta);

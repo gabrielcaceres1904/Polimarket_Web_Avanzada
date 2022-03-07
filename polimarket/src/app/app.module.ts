@@ -45,6 +45,7 @@ import {LineChartComponent} from "./componentes/line-chart/line-chart.component"
 import {SidebarComponent} from "./componentes/sidebar/sidebar.component";
 import { BusquedaOfertasComponent } from './componentes/busqueda-ofertas/busqueda-ofertas.component';
 import { ModalActualizarproductoComponent } from './componentes/modal-actualizarproducto/modal-actualizarproducto.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { ModalActualizarproductoComponent } from './componentes/modal-actualizar
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        NgChartsModule
+        NgChartsModule,
+        MatIconModule
     ],
   providers: [],
   bootstrap: [AppComponent]

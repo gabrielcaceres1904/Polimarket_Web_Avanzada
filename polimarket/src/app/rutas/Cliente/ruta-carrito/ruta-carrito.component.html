@@ -1,6 +1,5 @@
-<div style="margin: 20px">
-  <a [routerLink]="['/cliente', idUsuario, 'home']">Regresar</a>
-</div>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <div *ngIf="compras.length != 0" >
   <div class="container">
     <table class="table">
@@ -26,7 +25,7 @@
           <input type="number" min="1" max="{{compra.stock}}" value="{{compra.cantidad}}" (change)="actualizarTotales()" [(ngModel)]="compra.cantidad">
         </td>
         <td>${{compra.producto.precio * compra.cantidad}}</td>
-        <td (click)="eliminarCompra(compra)">{{compra.stock}}</td>
+        <td (click)="eliminarCompra(compra)"><mat-icon>delete</mat-icon></td>
       </tr>
       </tbody>
     </table>

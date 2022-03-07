@@ -49,6 +49,11 @@ export class NavbarComponent implements OnInit {
 
   volverHome() {
     const ruta = ['/cliente', this.idUsuario, 'home'];
-    this.router.navigate(ruta);
+    this.router.navigate(ruta,
+      {
+        queryParams: {
+          sucursal: 1
+        }
+      });
   }
 }

@@ -9,7 +9,9 @@
       <div class="d-flex flex-row" style="margin-left: 20px">
         <label for="busquedaCuenta" style="font-family: Poppins;padding-top: 15px;margin-right: 10px">Sucursal</label>
         <select class="btn btn-light browser-default custom-select col-md-12" (change)="actualizarBusqueda($event)" style="background-color: white; height: 100%">
+          <!--
           <option value="0">Todas</option>
+          -->
           <option *ngFor="let sucursal of sucursales" value="{{sucursal.idSucursal}}">{{sucursal.direccion}}</option>
         </select>
       </div>

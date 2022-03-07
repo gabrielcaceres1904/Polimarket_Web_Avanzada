@@ -4,4 +4,5 @@ export interface CompraCarritoInterface {
   producto: ProductoInterface,
   cantidad: number
   stock: number
+  idSucursal: number
 }

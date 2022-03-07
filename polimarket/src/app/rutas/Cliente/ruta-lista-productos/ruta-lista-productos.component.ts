@@ -111,7 +111,8 @@ export class RutaListaProductosComponent implements OnInit {
                       {
                         producto: this.productoSeleccionado,
                         cantidad: Number.parseInt(datos['cantidad']),
-                        stock: Number.parseInt(datos['stock'])
+                        stock: Number.parseInt(datos['stock']),
+                        idSucursal: this.sucursalSeleccionada
                       }
                     )
                     console.log(this.carrito)
@@ -149,7 +150,7 @@ export class RutaListaProductosComponent implements OnInit {
                     url: this.prefix + producto.codigo,
                     precio: producto.precio,
                     soldOut: false, // TODO
-                    stock: 0
+                    stock: 100
                   }
                 )
               }

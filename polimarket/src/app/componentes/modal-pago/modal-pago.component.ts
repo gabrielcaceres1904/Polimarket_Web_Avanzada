@@ -7,6 +7,8 @@ import {baseControlInterface} from "../../servicios/interfaces/app/base-control.
 import {TarjetaInterface} from "../../servicios/interfaces/modelo/tarjeta.interface";
 import {TarjetaCreateInterface} from "../../servicios/interfaces/create/tarjetaCreate.interface";
 import {DatePipe} from "@angular/common";
+import {ActivatedRoute} from "@angular/router";
+import {TarjetaService} from "../../servicios/http/tarjeta.service";
 
 @Component({
   selector: 'app-modal-pago',
@@ -27,23 +29,43 @@ export class ModalPagoComponent implements OnInit {
     }
   ] as baseControlInterface[]
 
-  tarjeta = ''
+  bancos = [
+    "Banco del Pichincha",
+    "Banco de Guayaquil",
+    "Banco del Pacífico",
+    "Banco del Austro"
+  ]
+
+  tarjetaSeleccionada: TarjetaInterface = {} as TarjetaInterface
+  tarjetas: {
+    tarjeta: TarjetaInterface,
+    banco: string
+  }[] = []
+  bancoSeleccionado = ''
+  tieneTarjetas = false;
+  secciones = [true, false, false]
 
   constructor(@Inject(MAT_DIALOG_DATA)
               public data: any,
               public dialogRef: MatDialogRef<RutaCarritoComponent>,
               private readonly formBuilder: FormBuilder,
-              private datePipe: DatePipe,) {
+              private datePipe: DatePipe,
+              private readonly activatedRoute: ActivatedRoute,
+              private readonly tarjetasService: TarjetaService) {
     this.formGroup =this.formBuilder.group(
       {
         tarjeta: ['', Validators.required],
         fechaExpiracion: ['', Validators.required],
         cvv: ['', Validators.required],
+        banco: [Validators.required]
       }
     )
+    this.tieneTarjetas = data.tieneTarjetas
+    this.buscarTarjetas()
   }
 
   ngOnInit(): void {
+
   }
 
   ingresarTarjeta() {
@@ -52,19 +74,78 @@ export class ModalPagoComponent implements OnInit {
     const expiracion = this.datePipe.transform(fecha, 'yyyy/MM/dd');
     const cvv = this.formGroup.get('cvv')?.value
     const idUsuario = this.data.idUsuario
-
-
+    const banco = this.formGroup.get('banco')?.value
 
     const tarjeta = {
       numero: numero,
-      entidadBancaria: expiracion + '-' + cvv,
+      entidadBancaria: banco + '-' + expiracion + '-' + cvv,
       idUsuario: idUsuario
     } as TarjetaCreateInterface
 
-    this.dialogRef.close({tarjeta: tarjeta})
+    this.dialogRef.close({tarjeta: tarjeta, create: true})
   }
 
   cancelar() {
     this.dialogRef.close()
+  }
+
+  selectChangeHandlerBanco(event: any) {
+    this.bancoSeleccionado = event.target.value
+  }
+
+  selectChangeHandlerTarjeta(event: any) {
+    const idTarjeta = Number.parseInt(event.target.value)
+    this.tarjetasService.buscarUno(idTarjeta)
+      .subscribe(
+        {
+          next: (datos) => { // try then
+            this.tarjetaSeleccionada = datos as TarjetaInterface
+          },
+          error: (error) => { // catch
+            console.error({error});
+          }
+        }
+      )
+  }
+
+  private buscarTarjetas() {
+    let tarjetasUsuario: {
+      tarjeta: TarjetaInterface,
+      banco: string
+    }[] = []
+    this.tarjetasService.buscarTodos({})
+      .subscribe(
+        {
+          next: (datos) => { // try then
+            //console.log(datos)
+            const tarjetas = datos as TarjetaInterface[]
+            for(let tarjeta of tarjetas){
+              if(tarjeta.idUsuario === Number.parseInt(this.data.idUsuario)){
+                const parts = tarjeta.entidadBancaria.split('-', 3)
+                tarjetasUsuario.push({
+                  tarjeta: tarjeta,
+                  banco: parts[0]
+                })
+              }
+            }
+          },
+          error: (error) => { // catch
+            console.error({error});
+          },
+          complete: ()=> {
+            this.tarjetas = tarjetasUsuario
+          }
+        }
+      )
+  }
+
+  cambiarSecciones(seccion: number){
+    for(let i=0; i<this.secciones.length; i++){
+      this.secciones[i] = i === seccion;
+    }
+  }
+
+  realizarCompra() {
+    this.dialogRef.close({tarjeta: this.tarjetaSeleccionada, create: false})
   }
 }
