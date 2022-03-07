@@ -43,6 +43,7 @@ import {ModalRegistrocuentaComponent} from "./componentes/modal-registrocuenta/m
 import {ModalEliminarcuentaComponent} from "./componentes/modal-eliminarcuenta/modal-eliminarcuenta.component";
 import {LineChartComponent} from "./componentes/line-chart/line-chart.component";
 import {SidebarComponent} from "./componentes/sidebar/sidebar.component";
+import { BusquedaOfertasComponent } from './componentes/busqueda-ofertas/busqueda-ofertas.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {SidebarComponent} from "./componentes/sidebar/sidebar.component";
     DoughnutChartComponent,
     AdmingeneralbusqproductosComponent,
     ModalRegistroproductoComponent,
-    ModalConfirmareliminarproductoComponent
+    ModalConfirmareliminarproductoComponent,
+    BusquedaOfertasComponent
   ],
     imports: [
         BrowserModule,

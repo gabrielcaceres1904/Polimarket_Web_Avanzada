@@ -8,16 +8,10 @@ import { DatePipe } from '@angular/common';
 import {PedidoDetalleCreateInterface} from "../../../servicios/interfaces/create/pedido-detalleCreate.interface";
 import {PedidoCreateInterface} from "../../../servicios/interfaces/create/pedidoCreate.interface";
 import {ActivatedRoute, Router} from "@angular/router";
-// import {ModalComponent} from "../../../componentes/modal/modal.component";
 import {MatDialog} from "@angular/material/dialog";
-// import {ModalPagoComponent} from "../../../componentes/modal-pago/modal-pago.component";
 import {TarjetaService} from "../../../servicios/http/tarjeta.service";
-import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
-import {OfertaBoxInterface} from "../../../servicios/interfaces/app/oferta-box.interface";
 import {TarjetaInterface} from "../../../servicios/interfaces/modelo/tarjeta.interface";
 import {TarjetaCreateInterface} from "../../../servicios/interfaces/create/tarjetaCreate.interface";
-import {UsuarioInterface} from "../../../servicios/interfaces/modelo/usuario.interface";
-import {UsuarioRolCreateInterface} from "../../../servicios/interfaces/create/usuarioRolCreate.interface";
 import {ModalPagoComponent} from "../../../componentes/modal-pago/modal-pago.component";
 
 @Component({
