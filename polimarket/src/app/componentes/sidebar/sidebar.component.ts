@@ -18,6 +18,7 @@ export class SidebarComponent implements OnInit {
   }[] = []
 
   idUsuario = -1
+  sucursalSeleccionada = -1
 
   constructor(private readonly router: Router,
               private readonly activatedRoute: ActivatedRoute,) { }
@@ -34,6 +35,24 @@ export class SidebarComponent implements OnInit {
         }
       })
 
+    const parametrosConsulta$ = this.activatedRoute.queryParams;
+
+    parametrosConsulta$.subscribe(
+      {
+        next:(queryParams)=>{
+          //console.log(queryParams);
+          if(queryParams['sucursal'] != undefined){
+            this.sucursalSeleccionada = Number.parseInt(queryParams['sucursal'])
+          }else{
+            this.sucursalSeleccionada = 0
+          }
+        },
+        error: (error)=>{
+          console.error(error)
+        },
+      }
+    )
+
   }
 
   actualizarProductos(categoria: any) {
@@ -42,7 +61,8 @@ export class SidebarComponent implements OnInit {
       ['/cliente', this.idUsuario, 'home'],
       {
         queryParams: {
-          categoria: categoria
+          categoria: categoria,
+          sucursal: this.sucursalSeleccionada
         }
       }
     )

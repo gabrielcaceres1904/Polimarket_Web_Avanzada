@@ -11,6 +11,9 @@ export class OfertaBoxComponent implements OnInit {
   @Input()
   formatoOferta: OfertaBoxInterface = {} as OfertaBoxInterface
 
+  @Input()
+  sold0ut = false
+
   constructor() { }
 
   ngOnInit(): void {
