@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CompraCarritoInterface} from "../../../servicios/interfaces/app/compra-carrito.interface";
 import {GlobalDataService} from "../../../servicios/global/global-data.service";
 import {ModalComponent} from "../../../componentes/modal/modal.component";
+import {SucursalInterface} from "../../../servicios/interfaces/modelo/sucursal.interface";
 
 
 @Component({
@@ -26,9 +27,12 @@ export class RutaListaProductosComponent implements OnInit {
     categoria: string,
     cantProductos: number
   }[] = []
+  sucursales: SucursalInterface[] = [];
+  sucursalActual: SucursalInterface = {} as SucursalInterface
 
   ofertas:OfertaBoxInterface[] = []
-  categoriaSeleccionada = ''
+  categoriaSeleccionada = -1
+  sucursalSeleccionada = -1
 
   idUsuario: number = 0
 
@@ -51,10 +55,12 @@ export class RutaListaProductosComponent implements OnInit {
       {
         next:(queryParams)=>{
           //console.log(queryParams);
-          this.categoriaSeleccionada = queryParams['categoria']
+          this.categoriaSeleccionada = Number.parseInt(queryParams['categoria'])
+          this.sucursalSeleccionada = Number.parseInt(queryParams['sucursal'])
           if(this.categoriaSeleccionada != undefined){
-            this.buscarProductos(Number.parseInt(this.categoriaSeleccionada))
+            this.buscarProductos(this.categoriaSeleccionada, this.sucursalSeleccionada)
           }
+
         },
         error: (error)=>{
           console.error(error)
@@ -118,7 +124,7 @@ export class RutaListaProductosComponent implements OnInit {
       )
   }
 
-  private buscarProductos(categoria: number) {
+  private buscarProductos(categoria: number, sucursalSeleccionada: number) {
     this.productoService.buscarTodos({})
       .subscribe(
         {

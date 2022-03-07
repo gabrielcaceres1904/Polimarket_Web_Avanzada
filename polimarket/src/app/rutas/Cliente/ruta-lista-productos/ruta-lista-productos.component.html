@@ -7,9 +7,7 @@
       <app-sidebar [categories]="detalleCategorias"></app-sidebar>
     </div>
     <div class="col-md-9">
-      <div class="d-flex justify-content-start">
-        <app-busqueda-ofertas></app-busqueda-ofertas>
-      </div>
+      <app-busqueda-ofertas></app-busqueda-ofertas>
       <div class="row">
         <div *ngFor="let oferta of ofertas" class="col-md-3">
           <app-oferta-box [formatoOferta]="oferta" (click)="verOferta(oferta)"></app-oferta-box>

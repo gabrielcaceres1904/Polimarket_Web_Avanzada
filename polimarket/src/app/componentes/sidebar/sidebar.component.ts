@@ -16,66 +16,6 @@ export class SidebarComponent implements OnInit {
     categoria: string,
     cantProductos: number
   }[] = []
-@Input()
-  categorias=[
-    {
-      categoria:"Lacteos",
-      cantProductos:10
-    },
-    {
-      categoria:"Cocina",
-      cantProductos:15
-    },
-    {
-      categoria:"Embutidos",
-      cantProductos:20
-    },
-    {
-      categoria:"Aseo Personal",
-      cantProductos:29
-    },
-    {
-      categoria:"Limpieza Hogar",
-      cantProductos:40
-    },
-    {
-      categoria:"Libros",
-      cantProductos:59
-    },
-    {
-      categoria:"Snacks",
-      cantProductos:110
-    },
-    {
-      categoria:"Licores",
-      cantProductos:56
-    },
-    {
-      categoria:"Utiles Escolares",
-      cantProductos:8
-    },
-    {
-      categoria:"Decoraciones",
-      cantProductos:5
-    },
-    {
-      categoria:"Revistas",
-      cantProductos:65
-    },
-    {
-      categoria:"Juguetes",
-      cantProductos:15
-    },
-    {
-      categoria:"Lacteos",
-      cantProductos:9
-    },
-    {
-      categoria:"Condimentos",
-      cantProductos:9
-    }
-
-  ]
 
   idUsuario = -1
 
