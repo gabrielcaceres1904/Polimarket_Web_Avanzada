@@ -5,6 +5,9 @@ import {ProductoService} from "../../../servicios/http/producto.service";
 import {MatDialog} from "@angular/material/dialog";
 // import {ModalComponent} from "../../../componentes/modal/modal.component";
 import {ModalConfirmareliminarproductoComponent} from "../../../componentes/modal-confirmareliminarproducto/modal-confirmareliminarproducto.component";
+import {ModalActualizarproductoComponent} from "../../../componentes/modal-actualizarproducto/modal-actualizarproducto.component";
+import {CategoriaInterface} from "../../../servicios/interfaces/modelo/categoria.interface";
+import {CategoriaService} from "../../../servicios/http/categoria.service";
 
 @Component({
   selector: 'app-ruta-productos',
@@ -13,10 +16,13 @@ import {ModalConfirmareliminarproductoComponent} from "../../../componentes/moda
 })
 export class RutaProductosComponent implements OnInit {
   listaProductos:ProductoInterface[]=[]
+  arrayCategorias!:CategoriaInterface[];
+  buscarProd='';
   constructor(
     private readonly activatedRoute:ActivatedRoute,
     private readonly productoServices:ProductoService,
-    public dialog:MatDialog
+    public dialog:MatDialog,
+    private readonly categoriasService:CategoriaService
   ) { }
 
   ngOnInit(): void {
@@ -25,8 +31,8 @@ export class RutaProductosComponent implements OnInit {
     parametrosConsulta$.subscribe(
       {
         next:(queryParams)=>{
-          //console.log(queryParams);
-          // this.categoriaSeleccionada = queryParams['categoria']
+          console.log(queryParams);
+          //this.categoriaSeleccionada = queryParams['categoria']
           // if(this.categoriaSeleccionada != undefined){
           //   this.buscarProductos(Number.parseInt(this.categoriaSeleccionada))
           // }
@@ -35,7 +41,23 @@ export class RutaProductosComponent implements OnInit {
           console.error(error)
         },
       }
-    )
+    );
+    this.categoriasService.buscarTodos('')
+      .subscribe(
+        {
+          next:(data)=>{
+            if(data){
+              this.arrayCategorias=data;
+            }
+          },
+          error:(error)=>{
+
+          },
+          complete:()=>{
+
+          }
+        }
+      );
   }
 
   llenarProductos(){
@@ -57,7 +79,12 @@ export class RutaProductosComponent implements OnInit {
       )
   }
   actualizarProducto(producto:ProductoInterface){
-
+    this.dialog.open(ModalActualizarproductoComponent,
+      {
+        width:"60%",
+        height:"85%",
+        data:{producto:producto,arrayCategorias:this.arrayCategorias}
+      });
   }
   eliminarProducto(idProducto:number){
     this.dialog.open(ModalConfirmareliminarproductoComponent,
@@ -66,6 +93,9 @@ export class RutaProductosComponent implements OnInit {
         width:"60%",
         height:"60%"
       })
+
+  }
+  buscarProducto(){
 
   }
 }
