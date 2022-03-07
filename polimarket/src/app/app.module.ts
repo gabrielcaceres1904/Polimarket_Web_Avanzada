@@ -44,6 +44,7 @@ import {ModalEliminarcuentaComponent} from "./componentes/modal-eliminarcuenta/m
 import {LineChartComponent} from "./componentes/line-chart/line-chart.component";
 import {SidebarComponent} from "./componentes/sidebar/sidebar.component";
 import { BusquedaOfertasComponent } from './componentes/busqueda-ofertas/busqueda-ofertas.component';
+import { ModalActualizarproductoComponent } from './componentes/modal-actualizarproducto/modal-actualizarproducto.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { BusquedaOfertasComponent } from './componentes/busqueda-ofertas/busqued
     AdmingeneralbusqproductosComponent,
     ModalRegistroproductoComponent,
     ModalConfirmareliminarproductoComponent,
-    BusquedaOfertasComponent
+    BusquedaOfertasComponent,
+    ModalActualizarproductoComponent
   ],
     imports: [
         BrowserModule,

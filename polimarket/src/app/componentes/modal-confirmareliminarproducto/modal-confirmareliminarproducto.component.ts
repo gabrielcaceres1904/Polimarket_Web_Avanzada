@@ -3,6 +3,7 @@ import {FormGroup} from "@angular/forms";
 import {ProductoService} from "../../servicios/http/producto.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {RutaProductosComponent} from "../../rutas/AdministradorGeneral/ruta-productos/ruta-productos.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-modal-confirmareliminarproducto',
@@ -13,7 +14,8 @@ export class ModalConfirmareliminarproductoComponent implements OnInit {
 
   constructor(
    private readonly productoService:ProductoService,
-    dialogRef:MatDialogRef<RutaProductosComponent>,
+    public dialogRef:MatDialogRef<RutaProductosComponent>,
+    private readonly router:Router,
     @Inject(MAT_DIALOG_DATA)
     private readonly data:number
   ) { }
@@ -27,6 +29,8 @@ export class ModalConfirmareliminarproductoComponent implements OnInit {
           next:(data)=>{
             if(data){
               console.log("Eliminando a ", data);
+              this.dialogRef.close();
+              this.router.navigate(["/admin-general",0,"cuentas"]);
             }
           },
           error:()=>{
@@ -38,7 +42,7 @@ export class ModalConfirmareliminarproductoComponent implements OnInit {
         }
       )
   }
-  eliminar(){
-
+  cancelar(){
+    this.dialogRef.close();
   }
 }

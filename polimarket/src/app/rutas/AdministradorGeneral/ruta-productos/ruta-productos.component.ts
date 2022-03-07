@@ -64,7 +64,7 @@ export class RutaProductosComponent implements OnInit {
       {
         data:idProducto,
         width:"60%",
-        height:"80%"
+        height:"60%"
       })
 
   }
