@@ -21,10 +21,13 @@
       <td>{{producto.producto.codigo}}</td>
       <td>{{producto.stock}}</td>
       <td>
-        <input type="number" min="1" [(ngModel)]="producto.adicional">
-        <mat-icon (click)="actualizarStock(producto.producto.idProducto, producto.adicional)">refresh</mat-icon>
+        <div class="col-md-12">
+          <input type="number" min="0" class="col-md-8" [(ngModel)]="producto.adicional">
+          <mat-icon class="col-md-4" (click)="actualizarStock(producto, producto.adicional)">refresh</mat-icon>
+        </div>
       </td>
     </tr>
     </tbody>
   </table>
 </div>
+

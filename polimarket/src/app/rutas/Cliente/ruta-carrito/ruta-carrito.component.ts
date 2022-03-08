@@ -13,7 +13,6 @@ import {TarjetaService} from "../../../servicios/http/tarjeta.service";
 import {TarjetaInterface} from "../../../servicios/interfaces/modelo/tarjeta.interface";
 import {TarjetaCreateInterface} from "../../../servicios/interfaces/create/tarjetaCreate.interface";
 import {ModalPagoComponent} from "../../../componentes/modal-pago/modal-pago.component";
-import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
 import {SucursalProductoService} from "../../../servicios/http/sucursal-producto.service";
 import {SucursalProductoInterface} from "../../../servicios/interfaces/modelo/sucursal-producto.interface";
 

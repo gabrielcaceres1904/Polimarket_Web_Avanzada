@@ -1,1 +1,19 @@
-<p>ruta-admin-perfil works!</p>
+<h3 class="d-flex justify-content-center tituloPerfil">Información de perfil</h3>
+<form [formGroup]="formGroup">
+  <div class="d-flex flex-row d-flex justify-content-center">
+    <div class="container col-md-6" style="margin: 20px">
+      <app-base-control [formGroup]="formGroup" [campos]="campos"></app-base-control>
+      <button class="btn btn-primary btn-lg col-md-6 text-white" (click)="actualizarUsuario()">Actualizar</button>
+      <button class="btn btn-light btn-lg col-md-6" (click)="volver()">Volver</button>
+    </div>
+    <!--
+    <div class="container col-md-6"  style="margin: 20px">
+      <select class="browser-default custom-select" (change)="selectChangeHandler($event)" formControlName="tarjetaUsuario">
+        <option *ngFor="let tarjeta of tarjetasUsuario" value="{{tarjeta.idTarjetaCredito}}">{{tarjeta.numero}}</option>
+      </select><br>
+      <button class="btn btn-primary btn-lg col-md-6 text-white" (click)="cambiarPassword()">Cambiar Contraseña</button>
+    </div>
+    -->
+  </div>
+
+</form>
