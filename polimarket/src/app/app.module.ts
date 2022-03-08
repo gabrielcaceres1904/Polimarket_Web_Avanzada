@@ -51,6 +51,8 @@ import { NavbarAdminComponent } from './componentes/navbar-admin/navbar-admin.co
 import { RutaDashboardComponent } from './rutas/Administrador/ruta-dashboard/ruta-dashboard.component';
 import { RutaAdminPedidosComponent } from './rutas/Administrador/ruta-admin-pedidos/ruta-admin-pedidos.component';
 import { RutaAdminProductosComponent } from './rutas/Administrador/ruta-admin-productos/ruta-admin-productos.component';
+import { RutaAdminPerfilComponent } from './rutas/Administrador/ruta-admin-perfil/ruta-admin-perfil.component';
+import { ModalDetallePedidoComponent } from './componentes/modal-detalle-pedido/modal-detalle-pedido.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { RutaAdminProductosComponent } from './rutas/Administrador/ruta-admin-pr
     RutaDashboardComponent,
     RutaAdminPedidosComponent,
     RutaAdminProductosComponent,
+    RutaAdminPerfilComponent,
+    ModalDetallePedidoComponent,
   ],
     imports: [
         BrowserModule,
