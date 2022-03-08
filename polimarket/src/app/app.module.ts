@@ -54,6 +54,7 @@ import { RutaAdminProductosComponent } from './rutas/Administrador/ruta-admin-pr
 import { RutaAdminPerfilComponent } from './rutas/Administrador/ruta-admin-perfil/ruta-admin-perfil.component';
 import { ModalDetallePedidoComponent } from './componentes/modal-detalle-pedido/modal-detalle-pedido.component';
 import { RutaPerfiladmingeneralComponent } from './rutas/AdministradorGeneral/ruta-perfiladmingeneral/ruta-perfiladmingeneral.component';
+import { ModalCambiarPasswordComponent } from './componentes/modal-cambiar-password/modal-cambiar-password.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { RutaPerfiladmingeneralComponent } from './rutas/AdministradorGeneral/ru
     RutaAdminPerfilComponent,
     ModalDetallePedidoComponent,
     RutaPerfiladmingeneralComponent,
+    ModalCambiarPasswordComponent,
   ],
     imports: [
         BrowserModule,
