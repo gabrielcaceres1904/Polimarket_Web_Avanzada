@@ -65,8 +65,8 @@ export class RutaHomeAdminComponent implements OnInit {
                     console.error({error});
                   },
                   complete: () => {
-                    const ruta = ['/admin', this.idUsuario, 'home'];
-                    this.router.navigate(ruta);
+                    //const ruta = ['/admin', this.idUsuario, 'home'];
+                    //this.router.navigate(ruta);
                   }
                 }
               )

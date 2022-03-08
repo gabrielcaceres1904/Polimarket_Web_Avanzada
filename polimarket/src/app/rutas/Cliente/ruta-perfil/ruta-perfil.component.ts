@@ -6,8 +6,6 @@ import {baseControlInterface} from "../../../servicios/interfaces/app/base-contr
 import {UsuarioInterface} from "../../../servicios/interfaces/modelo/usuario.interface";
 import {TarjetaInterface} from "../../../servicios/interfaces/modelo/tarjeta.interface";
 import {MatDialog} from "@angular/material/dialog";
-import {ModalComponent} from "../../../componentes/modal/modal.component";
-import {GlobalDataService} from "../../../servicios/global/global-data.service";
 import {TarjetaService} from "../../../servicios/http/tarjeta.service";
 import {ModalCambiarPasswordComponent} from "../../../componentes/modal-cambiar-password/modal-cambiar-password.component";
 
@@ -240,7 +238,6 @@ export class RutaPerfilComponent implements OnInit {
             //console.log(datos)
             const tarjetas = datos as TarjetaInterface[]
             for(let tarjeta of tarjetas){
-              console.log(tarjeta.idUsuario,  '-', this.idUsuario)
               if(tarjeta.idUsuario === Number.parseInt(String(this.idUsuario))){
                 const parts = tarjeta.entidadBancaria.split('-', 3)
                 tarjetasUsuario.push({

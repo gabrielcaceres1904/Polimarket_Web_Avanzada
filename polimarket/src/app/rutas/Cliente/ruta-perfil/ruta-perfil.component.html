@@ -3,12 +3,12 @@
   <div class="d-flex justify-content-center">
     <div  class="d-flex flex-row col-md-6">
       <div class="container d-flex flex-column">
-        <div class="col-md-12" style="margin: 20px">
+        <div class="col-md-12">
           <app-base-control [formGroup]="formGroup" [campos]="campos"></app-base-control>
         </div>
         <div class="col-md-12">
           <div *ngIf="tarjetasUsuario.length !=0" class="row">
-            <div class="col-md-8">
+            <div class="col-md-10">
               <label>Tarjetas: </label>
               <select class="browser-default custom-select" (change)="selectChangeHandler($event)" formControlName="tarjetaSeleccionada">
                 <option *ngFor="let tarjeta of tarjetasUsuario" value="{{tarjeta.tarjeta.idTarjetaCredito}}">
