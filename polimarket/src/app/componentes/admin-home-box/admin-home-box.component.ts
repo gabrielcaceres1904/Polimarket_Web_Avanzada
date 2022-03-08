@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-admin-home-box',
@@ -6,6 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-home-box.component.scss']
 })
 export class AdminHomeBoxComponent implements OnInit {
+
+  @Input()
+  box =  {
+    titulo: '',
+    icon: '',
+    value: -1
+  }
 
   constructor() { }
 

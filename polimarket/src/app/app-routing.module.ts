@@ -15,6 +15,7 @@ import {RutaAdmingeneralPerfilComponent} from "./rutas/AdministradorGeneral/ruta
 import {RutaDashboardComponent} from "./rutas/Administrador/ruta-dashboard/ruta-dashboard.component";
 import {RutaAdminProductosComponent} from "./rutas/Administrador/ruta-admin-productos/ruta-admin-productos.component";
 import {RutaAdminPedidosComponent} from "./rutas/Administrador/ruta-admin-pedidos/ruta-admin-pedidos.component";
+import {RutaAdminPerfilComponent} from "./rutas/Administrador/ruta-admin-perfil/ruta-admin-perfil.component";
 
 const routes: Routes = [
   {
@@ -70,6 +71,10 @@ const routes: Routes = [
       {
         path: 'pedidos',
         component: RutaAdminPedidosComponent
+      },
+      {
+        path: 'perfil',
+        component: RutaAdminPerfilComponent
       }
     ]
   },

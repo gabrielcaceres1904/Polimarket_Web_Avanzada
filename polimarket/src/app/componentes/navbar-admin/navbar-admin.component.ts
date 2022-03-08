@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -7,6 +7,9 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./navbar-admin.component.scss']
 })
 export class NavbarAdminComponent implements OnInit {
+
+  @Input()
+  nombreUsuario = ''
 
   idUsuario = -1
   constructor(private readonly router: Router,
@@ -24,7 +27,7 @@ export class NavbarAdminComponent implements OnInit {
       })
   }
   verPerfil() {
-    const ruta = ['/admin-general', this.idUsuario, 'perfil'];
+    const ruta = ['/admin', this.idUsuario, 'perfil'];
     this.router.navigate(ruta);
   }
   cerrarSesion() {
