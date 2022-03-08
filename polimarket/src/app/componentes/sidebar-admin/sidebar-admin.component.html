@@ -1,1 +1,20 @@
-<p>sidebar-admin works!</p>
+<ul class="nav " id="menu" >
+  <li class="nav-item">
+    <a class="nav-link text-truncate" style="color: black;font-family: Poppins">
+      <span class="ms-1 d-none d-sm-inline">{{tituloSideBar}}</span>
+    </a>
+  </li>
+
+  <li class="nav-item w-100" *ngFor="let categoria of categories">
+    <div class="row justify-content-start">
+      <div class="col-10" style="padding-right: 0">
+        <a class="nav-link text-truncate text-left" style="font-weight: bold; font-family: Abril Fatface" (click)="cambiarSeccion(categoria)">
+          <span class="ms-1 d-none d-sm-inline category">{{categoria}}</span>
+        </a>
+      </div>
+    </div>
+  </li>
+
+</ul>
+
+
