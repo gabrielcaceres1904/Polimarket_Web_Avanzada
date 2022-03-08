@@ -5,7 +5,6 @@ import {ActivatedRoute} from "@angular/router";
 import {SucursalInterface} from "../../../servicios/interfaces/modelo/sucursal.interface";
 import {SucursalService} from "../../../servicios/http/sucursal.service";
 import {SucursalProductoInterface} from "../../../servicios/interfaces/modelo/sucursal-producto.interface";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProductoService} from "../../../servicios/http/producto.service";
 import {ProductoInterface} from "../../../servicios/interfaces/modelo/producto.interface";
 
