@@ -1,1 +1,30 @@
-<p>ruta-admin-productos works!</p>
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Producto</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Código</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Actualizar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let producto of productosSucursal">
+      <td>
+        <div class="item-carrito">
+          <img src="{{prefix + producto.producto.codigo}}">
+          <span>{{producto.producto.nombre}}</span>
+        </div>
+      </td>
+      <td>${{producto.producto.precio}}</td>
+      <td>{{producto.producto.codigo}}</td>
+      <td>{{producto.stock}}</td>
+      <td>
+        <input type="number" min="1" [(ngModel)]="producto.adicional">
+        <mat-icon (click)="actualizarStock(producto.producto.idProducto, producto.adicional)">refresh</mat-icon>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
