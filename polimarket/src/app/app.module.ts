@@ -53,6 +53,7 @@ import { RutaAdminPedidosComponent } from './rutas/Administrador/ruta-admin-pedi
 import { RutaAdminProductosComponent } from './rutas/Administrador/ruta-admin-productos/ruta-admin-productos.component';
 import { RutaAdminPerfilComponent } from './rutas/Administrador/ruta-admin-perfil/ruta-admin-perfil.component';
 import { ModalDetallePedidoComponent } from './componentes/modal-detalle-pedido/modal-detalle-pedido.component';
+import { RutaPerfiladmingeneralComponent } from './rutas/AdministradorGeneral/ruta-perfiladmingeneral/ruta-perfiladmingeneral.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { ModalDetallePedidoComponent } from './componentes/modal-detalle-pedido/
     RutaAdminProductosComponent,
     RutaAdminPerfilComponent,
     ModalDetallePedidoComponent,
+    RutaPerfiladmingeneralComponent,
   ],
     imports: [
         BrowserModule,
