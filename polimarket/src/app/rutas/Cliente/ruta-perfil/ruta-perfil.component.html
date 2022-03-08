@@ -1,21 +1,39 @@
 <h3 class="d-flex justify-content-center tituloPerfil">Información de perfil</h3>
 <form [formGroup]="formGroup">
-  <div class="d-flex flex-row d-flex justify-content-center">
-    <div class="container col-md-6" style="margin: 20px">
-      <app-base-control [formGroup]="formGroup" [campos]="campos"></app-base-control>
-      <button class="btn btn-primary btn-lg col-md-6 text-white" (click)="actualizarUsuario()">Actualizar</button>
-      <button class="btn btn-light btn-lg col-md-6" (click)="volver()">Volver</button>
+  <div class="d-flex justify-content-center">
+    <div  class="d-flex flex-row col-md-6">
+      <div class="container d-flex flex-column">
+        <div class="col-md-12" style="margin: 20px">
+          <app-base-control [formGroup]="formGroup" [campos]="campos"></app-base-control>
+        </div>
+        <div class="col-md-12">
+          <div *ngIf="tarjetasUsuario.length !=0" class="row">
+            <div class="col-md-8">
+              <label>Tarjetas: </label>
+              <select class="browser-default custom-select" (change)="selectChangeHandler($event)" formControlName="tarjetaSeleccionada">
+                <option *ngFor="let tarjeta of tarjetasUsuario" value="{{tarjeta.tarjeta.idTarjetaCredito}}">
+                  <span>{{tarjeta.banco}}: {{tarjeta.tarjeta.numero}}</span>
+                </option>
+              </select>
+            </div>
+            <div class="col-md-2" (click)="eliminarTarjeta()" style="padding-top: 30px">
+              <mat-icon>delete</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 d-flex justify-content-center" style="padding: 10px">
+          <!--
+          <button class="btn btn-dark text-white" style="font-size: 20px" (click)="cambiarPassword()">Cambiar Contraseña</button>
+          -->
+          <span style="color: #33A0FF" class="change-password" (click)="cambiarPassword()">Cambiar contraseña</span>
+        </div>
+        <div class="col-md-12 d-flex justify-content-center">
+          <button class="btn btn-primary btn-lg text-white" style="margin: 0px 10px" (click)="actualizarUsuario()">Actualizar</button>
+          <button class="btn btn-light btn-lg" style="margin: 0px 10px" (click)="volver()">Volver</button>
+        </div>
+      </div>
     </div>
-    <!--
-    <div class="container col-md-6"  style="margin: 20px">
-      <select class="browser-default custom-select" (change)="selectChangeHandler($event)" formControlName="tarjetaUsuario">
-        <option *ngFor="let tarjeta of tarjetasUsuario" value="{{tarjeta.idTarjetaCredito}}">{{tarjeta.numero}}</option>
-      </select><br>
-      <button class="btn btn-primary btn-lg col-md-6 text-white" (click)="cambiarPassword()">Cambiar Contraseña</button>
-    </div>
-    -->
   </div>
-
 </form>
 
 

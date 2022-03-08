@@ -5,6 +5,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {baseControlInterface} from "../../../servicios/interfaces/app/base-control.interface";
 import {UsuarioInterface} from "../../../servicios/interfaces/modelo/usuario.interface";
 import {TarjetaInterface} from "../../../servicios/interfaces/modelo/tarjeta.interface";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalComponent} from "../../../componentes/modal/modal.component";
+import {GlobalDataService} from "../../../servicios/global/global-data.service";
+import {TarjetaService} from "../../../servicios/http/tarjeta.service";
+import {ModalCambiarPasswordComponent} from "../../../componentes/modal-cambiar-password/modal-cambiar-password.component";
 
 @Component({
   selector: 'app-ruta-perfil',
@@ -33,13 +38,20 @@ export class RutaPerfilComponent implements OnInit {
     },
   ] as baseControlInterface[]
 
-  tarjetasUsuario: TarjetaInterface[] = []
-  tarjetaSeleccionada = ''
+  tarjetaSeleccionada: TarjetaInterface = {} as TarjetaInterface
+  tarjetasUsuario: {
+    tarjeta: TarjetaInterface,
+    banco: string
+  }[] = []
+  bancoSeleccionado = ''
+  tieneTarjetas = false;
 
   constructor(private readonly router: Router,
               private readonly activatedRoute: ActivatedRoute,
               private readonly usuarioService: UsuarioService,
-              private readonly formBuilder: FormBuilder,) {
+              private readonly formBuilder: FormBuilder,
+              private readonly tarjetasService: TarjetaService,
+              public dialog: MatDialog) {
     // @ts-ignore
     const parametroRuta = this.activatedRoute.parent.params;
     parametroRuta
@@ -56,8 +68,10 @@ export class RutaPerfilComponent implements OnInit {
         apellido: [this.usuarioActual ? this.usuarioActual.apellido : '', Validators.required],
         domicilio: [this.usuarioActual ? this.usuarioActual.direccion : '', Validators.required],
         email: [this.usuarioActual.email ? this.usuarioActual.email: '', Validators.required],
+        tarjetaSeleccionada: ['', Validators.required]
       }
     )
+    this.buscarTarjetas()
   }
 
   ngOnInit(): void {
@@ -74,8 +88,8 @@ export class RutaPerfilComponent implements OnInit {
   }
 
   buscarUsuario(id:number){
-    const buscarProductoraId$ = this.usuarioService.buscarUno(id);
-    buscarProductoraId$
+    const buscarUsuarioId$ = this.usuarioService.buscarUno(id);
+    buscarUsuarioId$
       .subscribe(
         {
           next: (data) => {
@@ -97,6 +111,7 @@ export class RutaPerfilComponent implements OnInit {
           apellido: [this.usuarioActual ? this.usuarioActual.apellido: '', Validators.required],
           domicilio: [this.usuarioActual ? this.usuarioActual.direccion: '', Validators.required],
           email: [this.usuarioActual.email ? this.usuarioActual.email: '', Validators.required],
+          tarjetaSeleccionada: ['', Validators.required]
         }
       )
   }
@@ -158,10 +173,91 @@ export class RutaPerfilComponent implements OnInit {
   }
 
   cambiarPassword() {
-
+    const referenciaDialogo = this.dialog.open(
+      ModalCambiarPasswordComponent,
+      {
+        disableClose: false,
+        data: {
+          usuario: this.usuarioActual
+        }
+      }
+    )
+    const despuesCerrado$ = referenciaDialogo.afterClosed()
+    despuesCerrado$
+      .subscribe(
+        (datos) => {
+          if(datos!=undefined){
+            this.usuarioActual.password = datos['passwordNueva']
+            this.actualizarUsuario()
+          }
+        }
+      )
   }
 
   selectChangeHandler (event: any) {
-    this.tarjetaSeleccionada = event.target.value;
+    const idTarjeta = Number.parseInt(event.target.value)
+    this.tarjetasService.buscarUno(idTarjeta)
+      .subscribe(
+        {
+          next: (datos) => { // try then
+            this.tarjetaSeleccionada = datos as TarjetaInterface
+          },
+          error: (error) => { // catch
+            console.error({error});
+          }
+        }
+      )
+  }
+
+  eliminarTarjeta() {
+    const idTarjeta = this.tarjetaSeleccionada.idTarjetaCredito
+    //console.log(this.tarjetaSeleccionada.idTarjetaCredito)
+
+    this.tarjetasService.eliminarPorId(idTarjeta)
+      .subscribe(
+        {
+          next: (datos) => {
+            //console.log({datos})
+            this.refresh()
+            this.buscarTarjetas()
+          },
+          error: (error) => {
+            console.error({error})
+          }
+        }
+      )
+  }
+
+  private buscarTarjetas() {
+    let tarjetasUsuario: {
+      tarjeta: TarjetaInterface,
+      banco: string
+    }[] = []
+    this.tarjetasService.buscarTodos({})
+      .subscribe(
+        {
+          next: (datos) => { // try then
+            //console.log(datos)
+            const tarjetas = datos as TarjetaInterface[]
+            for(let tarjeta of tarjetas){
+              console.log(tarjeta.idUsuario,  '-', this.idUsuario)
+              if(tarjeta.idUsuario === Number.parseInt(String(this.idUsuario))){
+                const parts = tarjeta.entidadBancaria.split('-', 3)
+                tarjetasUsuario.push({
+                  tarjeta: tarjeta,
+                  banco: parts[0]
+                })
+              }
+            }
+          },
+          error: (error) => { // catch
+            console.error({error});
+          },
+          complete: ()=> {
+            this.tarjetasUsuario = tarjetasUsuario
+            //console.log(this.tarjetasUsuario)
+          }
+        }
+      )
   }
 }

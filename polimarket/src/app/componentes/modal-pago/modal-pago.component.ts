@@ -71,14 +71,14 @@ export class ModalPagoComponent implements OnInit {
   ingresarTarjeta() {
     const numero = this.formGroup.get('tarjeta')?.value
     const fecha = this.formGroup.get('fechaExpiracion')?.value
-    const expiracion = this.datePipe.transform(fecha, 'yyyy/MM/dd');
+    const expiracion = this.datePipe.transform(fecha, 'MM/yyyy');
     const cvv = this.formGroup.get('cvv')?.value
     const idUsuario = this.data.idUsuario
     const banco = this.formGroup.get('banco')?.value
 
     const tarjeta = {
       numero: numero,
-      entidadBancaria: banco + '-' + expiracion + '-' + cvv,
+      entidadBancaria: banco.trim() + '-' + expiracion?.trim() + '-' + cvv.trim(),
       idUsuario: idUsuario
     } as TarjetaCreateInterface
 
