@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RutaHomeclienteComponent } from './rutas/Cliente/ruta-homecliente/ruta-homecliente.component';
-// import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { RutaNotFoundComponent } from './rutas/ruta-not-found/ruta-not-found.component';
@@ -46,6 +45,12 @@ import {SidebarComponent} from "./componentes/sidebar/sidebar.component";
 import { BusquedaOfertasComponent } from './componentes/busqueda-ofertas/busqueda-ofertas.component';
 import { ModalActualizarproductoComponent } from './componentes/modal-actualizarproducto/modal-actualizarproducto.component';
 import {MatIconModule} from "@angular/material/icon";
+import { AdminHomeBoxComponent } from './componentes/admin-home-box/admin-home-box.component';
+import { SidebarAdminComponent } from './componentes/sidebar-admin/sidebar-admin.component';
+import { NavbarAdminComponent } from './componentes/navbar-admin/navbar-admin.component';
+import { RutaDashboardComponent } from './rutas/Administrador/ruta-dashboard/ruta-dashboard.component';
+import { RutaAdminPedidosComponent } from './rutas/Administrador/ruta-admin-pedidos/ruta-admin-pedidos.component';
+import { RutaAdminProductosComponent } from './rutas/Administrador/ruta-admin-productos/ruta-admin-productos.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +87,13 @@ import {MatIconModule} from "@angular/material/icon";
     ModalRegistroproductoComponent,
     ModalConfirmareliminarproductoComponent,
     BusquedaOfertasComponent,
-    ModalActualizarproductoComponent
+    ModalActualizarproductoComponent,
+    AdminHomeBoxComponent,
+    SidebarAdminComponent,
+    NavbarAdminComponent,
+    RutaDashboardComponent,
+    RutaAdminPedidosComponent,
+    RutaAdminProductosComponent,
   ],
     imports: [
         BrowserModule,

@@ -12,6 +12,9 @@ import {RutaResumenComponent} from "./rutas/Cliente/ruta-resumen/ruta-resumen.co
 import {RutaCuentasComponent} from "./rutas/AdministradorGeneral/ruta-cuentas/ruta-cuentas.component";
 import {RutaProductosComponent} from "./rutas/AdministradorGeneral/ruta-productos/ruta-productos.component";
 import {RutaAdmingeneralPerfilComponent} from "./rutas/AdministradorGeneral/ruta-admingeneral-perfil/ruta-admingeneral-perfil.component";
+import {RutaDashboardComponent} from "./rutas/Administrador/ruta-dashboard/ruta-dashboard.component";
+import {RutaAdminProductosComponent} from "./rutas/Administrador/ruta-admin-productos/ruta-admin-productos.component";
+import {RutaAdminPedidosComponent} from "./rutas/Administrador/ruta-admin-pedidos/ruta-admin-pedidos.component";
 
 const routes: Routes = [
   {
@@ -53,9 +56,22 @@ const routes: Routes = [
 
   // Administrador
   {
-    path: 'admin',
+    path: 'admin/:idAdmin',
     component: RutaHomeAdminComponent,
-    children: []
+    children: [
+      {
+        path: 'home',
+        component: RutaDashboardComponent
+      },
+      {
+        path: 'productos',
+        component: RutaAdminProductosComponent
+      },
+      {
+        path: 'pedidos',
+        component: RutaAdminPedidosComponent
+      }
+    ]
   },
 
   // Administrador General

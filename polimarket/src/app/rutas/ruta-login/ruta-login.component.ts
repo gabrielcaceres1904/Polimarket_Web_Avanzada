@@ -119,7 +119,8 @@ export class RutaLoginComponent implements OnInit {
                                   }
                                 });
                             }else if(tipoUsuario === 2){
-                              const ruta = ['/admin'];
+                              //const ruta = ['/admin', this.usuarioValidado.idUsuario, 'home'];
+                              const ruta = ['/admin', this.usuarioValidado.idUsuario];
                               this.router.navigate(ruta);
                             }else if(tipoUsuario === 3){
                               GlobalDataService.administradorGeneral=this.usuarioValidado;
