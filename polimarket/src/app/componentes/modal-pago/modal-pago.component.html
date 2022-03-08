@@ -31,7 +31,7 @@
     <div class="d-flex flex-row">
       <div class="col-md-7">
         <label>Selecciona una Entidad Bancaria: </label>
-        <select class="btn btn-light browser-default custom-select" (change)="selectChangeHandlerBanco($event)">
+        <select class="btn btn-light browser-default custom-select" (change)="selectChangeHandlerBanco($event)" formControlName="banco">
           <option *ngFor="let banco of bancos" value="{{banco}}">{{banco}}</option>
         </select><br>
         <img src="https://images.twinkl.co.uk/tr/image/upload/t_illustration/illustation/credit-card.png" class="col-md-12">

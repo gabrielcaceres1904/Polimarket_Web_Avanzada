@@ -111,10 +111,11 @@ export class RutaCarritoComponent implements OnInit {
     despuesCerrado$
       .subscribe(
         (datos) => {
-          //console.log(datos)
+          console.log(datos)
           if(datos!=undefined){
             const tarjeta = datos['tarjeta'] as TarjetaCreateInterface
-            if(datos['create']){
+            const create = datos['create'] as boolean
+            if(create){
               //console.log(tarjeta)
               this.tarjetaService.crear(tarjeta)
                 .subscribe(

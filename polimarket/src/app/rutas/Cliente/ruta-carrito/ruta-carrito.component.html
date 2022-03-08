@@ -25,7 +25,7 @@
           <input type="number" min="1" max="{{compra.stock}}" value="{{compra.cantidad}}" (change)="actualizarTotales()" [(ngModel)]="compra.cantidad">
         </td>
         <td>${{compra.producto.precio * compra.cantidad}}</td>
-        <td (click)="eliminarCompra(compra)"><mat-icon>delete</mat-icon></td>
+        <td (click)="eliminarCompra(compra)"><mat-icon class="delete-icon">delete</mat-icon></td>
       </tr>
       </tbody>
     </table>

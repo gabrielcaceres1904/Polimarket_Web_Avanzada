@@ -38,6 +38,11 @@ export class RutaListaProductosComponent implements OnInit {
   productoSeleccionado: ProductoInterface = {} as ProductoInterface
   carrito: CompraCarritoInterface[] = []
 
+  //Busqueda
+  busqueda = ''
+  sinFiltro = true
+  ofertasBusqueda:OfertaBoxInterface[] = []
+
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly router: Router,
               private readonly productoService: ProductoService,
@@ -56,8 +61,17 @@ export class RutaListaProductosComponent implements OnInit {
           //console.log(queryParams);
           this.categoriaSeleccionada = Number.parseInt(queryParams['categoria'])
           this.sucursalSeleccionada = Number.parseInt(queryParams['sucursal'])
+          this.busqueda = queryParams['nombre']
+
           if(this.categoriaSeleccionada != undefined){
             this.buscarProductos(this.categoriaSeleccionada, this.sucursalSeleccionada)
+          }
+
+          if(this.busqueda != undefined){
+            this.productosBusqueda(this.categoriaSeleccionada, this.sucursalSeleccionada)
+            this.sinFiltro = false
+          }else{
+            this.sinFiltro = true
           }
         },
         error: (error)=>{
@@ -340,5 +354,18 @@ export class RutaListaProductosComponent implements OnInit {
           }
         }
       )
+  }
+
+  private productosBusqueda(categoria: number, sucursal: number) {
+    let ofertasSeleccionadas: OfertaBoxInterface[] = []
+    for(let oferta of this.ofertas){
+      //console.log(oferta.nombre.includes(this.busqueda))
+      if(oferta.nombre.includes(this.busqueda)){
+        ofertasSeleccionadas.push(oferta)
+      }
+    }
+    this.ofertasBusqueda = ofertasSeleccionadas
+    //console.log(this.ofertasBusqueda)
+    //console.log('Sin Filtro: ', this.sinFiltro)
   }
 }

@@ -1,10 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SucursalInterface} from "../../servicios/interfaces/modelo/sucursal.interface";
 import {SucursalService} from "../../servicios/http/sucursal.service";
-import {UsuarioInterface} from "../../servicios/interfaces/modelo/usuario.interface";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CategoriaInterface} from "../../servicios/interfaces/modelo/categoria.interface";
-import {ProductoInterface} from "../../servicios/interfaces/modelo/producto.interface";
 
 @Component({
   selector: 'app-busqueda-ofertas',
@@ -18,6 +15,8 @@ export class BusquedaOfertasComponent implements OnInit {
   sucursalActual: SucursalInterface = {} as SucursalInterface
   idUsuario = -1
   categoriaSeleccionada = -1
+  sucursalSeleccionada =-1
+  busqueda = ''
 
   constructor(private readonly sucursalService: SucursalService,
               private readonly router: Router,
@@ -33,6 +32,13 @@ export class BusquedaOfertasComponent implements OnInit {
         next:(queryParams)=>{
           //console.log(queryParams);
           this.categoriaSeleccionada = Number.parseInt(queryParams['categoria'])
+          this.sucursalSeleccionada = Number.parseInt(queryParams['sucursal'])
+          const busquedaOferta = this.busqueda = queryParams['nombre']
+          if(busquedaOferta === undefined){
+            let valorOferta = <HTMLInputElement> document.getElementById("busquedaOferta");
+            valorOferta.value = ''
+          }
+
         },
         error: (error)=>{
           console.error(error)
@@ -53,10 +59,35 @@ export class BusquedaOfertasComponent implements OnInit {
   }
 
   botonBuscar() {
-
+    let valor = <HTMLInputElement> document.getElementById("busquedaOferta");
+    this.busqueda = valor.value;
+    if(this.busqueda != ''){
+      this.router.navigate(
+        ['/cliente', this.idUsuario, 'home'],
+        {
+          queryParams: {
+            categoria: this.categoriaSeleccionada,
+            sucursal: this.sucursalSeleccionada,
+            nombre: this.busqueda
+          }
+        }
+      )
+    }else{
+      this.router.navigate(
+        ['/cliente', this.idUsuario, 'home'],
+        {
+          queryParams: {
+            categoria: this.categoriaSeleccionada,
+            sucursal: this.sucursalSeleccionada,
+          }
+        }
+      )
+    }
   }
 
   actualizarBusqueda(event: any) {
+    let valorOferta = <HTMLInputElement> document.getElementById("busquedaOferta");
+    valorOferta.value = ''
     const valor = Number.parseInt(event.target.value)
     //console.log(valor)
     if(valor != 0){
