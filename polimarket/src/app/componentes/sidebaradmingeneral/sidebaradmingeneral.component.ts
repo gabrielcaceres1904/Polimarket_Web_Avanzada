@@ -38,7 +38,7 @@ export class SidebaradmingeneralComponent implements OnInit {
   actualizarProductos(categoria: any) {
     console.log("categoria", typeof categoria)
     let idUsuario=0;
-    if(GlobalDataService.usuarioActual.idUsuario){
+    if(GlobalDataService.administradorGeneral.idUsuario){
       idUsuario=GlobalDataService.administradorGeneral.idUsuario;
     }
     if(categoria===1){

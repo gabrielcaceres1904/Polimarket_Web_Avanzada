@@ -19,6 +19,7 @@ export class RutaCuentasComponent implements OnInit {
   busqueda="";
   //recueprar datos de tablas
   listaUsuarios:UsuarioInterface[]=[]
+  listaRolesUsuarios:UsuarioRolInterface[]=[]
   constructor(
     private readonly usersService:UsuarioService,
     private readonly usuarioRolService:UsuarioRolService,
@@ -28,17 +29,17 @@ export class RutaCuentasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // let param = ""
-    // let idUsuario = ""
+
     const parametros$ = this.activatedRoute.queryParams;
     parametros$.subscribe({
       next:(queryParams)=>{
         if(queryParams){
           console.log(queryParams);
           this.busqueda=queryParams["nombre"];
-          if(this.busqueda){
-            this.buscarPorNombre();
-          }else{
+          if(this.busqueda) {
+              this.buscarPorNombre();
+              this.busqueda='';
+           }else{
             this.llenarUsuarios("");
           }
         }
@@ -54,41 +55,95 @@ export class RutaCuentasComponent implements OnInit {
 
   }
   llenarUsuarios(param:string){
-    this.usersService.buscarTodos(param).subscribe(
-      {
-        next:(data)=>{
-          if(data){
-            this.listaUsuarios=data;
-          }
+    this.listaUsuarios=[];
+    this.usuarioRolService.buscarTodos("")
+      .subscribe(
+        {
+          next:(data)=>{
+            if(data){
+              for(let roluser of data){
+                if(roluser.idRol===2||roluser.idRol===3){
+                  this.listaRolesUsuarios.push(roluser);
+                }
+              }
+              console.log("rolusers",this.listaRolesUsuarios);
+            }
+          },
+          error:(error)=>{
+            console.log(error);
+          },
+          complete:()=>{
+            this.usersService.buscarTodos(param).subscribe(
+              {
+                next:(data)=>{
+                  if(data){
+                    for(let user of data){
+
+                      for(let rolusuario of this.listaRolesUsuarios){
+                        if(user.idUsuario===rolusuario.idUsuario){
+                          this.listaUsuarios.push(user);
+                          break;
+                        }
+                      }
+                    }
+                    console.log("usuario: a entrar:",this.listaUsuarios);
+                    //this.listaUsuarios=data;
+                  }
+                }
+              }
+            );
+          },
         }
-      }
-    );
+      )
+    // this.usersService.buscarTodos(param).subscribe(
+    //   {
+    //     next:(data)=>{
+    //       if(data){
+    //         this.listaUsuarios=data;
+    //       }
+    //     }
+    //   }
+    // );
   }
   buscarPorNombre(){
-    this.usersService.buscarTodos("").subscribe(
-      {
-        next:(data)=>{
-          if(data){
-            let usersFind:UsuarioInterface[]=[];
-            for(let usuario of data){
-              console.log(usuario.nombre.trim());
-              if(usuario.nombre.trim()===this.busqueda.trim()){
-                usersFind.push(usuario);
-                this.listaUsuarios=usersFind;
-                this.busqueda='';
-                break;
-              }
-            }
-          }
-        },
-        error:(error)=>{
-          console.log(error);
-        },
-        complete:()=>{
-
-        }
+    if(!this.listaUsuarios){
+      this.llenarUsuarios("");
+    }
+    let usersFind:UsuarioInterface[]=[]
+    for(let user of  this.listaUsuarios){
+      if(user.nombre.trim()===this.busqueda.trim()){
+        usersFind.push(user);
+        break;
       }
-    )
+    }
+    if(usersFind.length>0){
+      this.listaUsuarios=usersFind;
+      usersFind=[];
+    }
+    // this.usersService.buscarTodos("").subscribe(
+    //   {
+    //     next:(data)=>{
+    //       if(data){
+    //         let usersFind:UsuarioInterface[]=[];
+    //         for(let usuario of data){
+    //           console.log(usuario.nombre.trim());
+    //           if(usuario.nombre.trim()===this.busqueda.trim()&&){
+    //             usersFind.push(usuario);
+    //             this.listaUsuarios=usersFind;
+    //             this.busqueda='';
+    //             break;
+    //           }
+    //         }
+    //       }
+    //     },
+    //     error:(error)=>{
+    //       console.log(error);
+    //     },
+    //     complete:()=>{
+    //
+    //     }
+    //   }
+    // )
   }
   eliminarCuenta(id:number){
     console.log("eliminando a",id);

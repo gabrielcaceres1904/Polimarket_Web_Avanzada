@@ -1,1 +1,29 @@
-<p>ruta-admin-pedidos works!</p>
+<div class="container-fluid">
+  <app-admingeneralbusquedacomponent></app-admingeneralbusquedacomponent>
+  <table class="table table-borderless ">
+    <thead>
+    <tr>
+      <th scope="col">FECHA</th>
+      <th scope="col">ESTADO</th>
+      <th scope="col">TOTAL</th>
+      <th scope="col">OPCIÓN</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let pedido of listaPedidos;let indice=index">
+      <td >{{pedido.fechaPedido}}</td>
+      <td >{{pedido.estado}}</td>
+      <td >{{listaTotalesPedidos[indice]}}</td>
+      <td ><a (click)="verDetalle(pedido)">Ver detalle<span class="bi bi-eye-fill" style="padding-right: 5px"></span> </a> </td>
+    </tr>
+<!--    <tr >-->
+<!--      <td >Hj</td>-->
+<!--      <td >dasda</td>-->
+<!--      <td >$400</td>-->
+<!--      <td ><a (click)="verDetalle()">Ver detalle<span class="bi bi-eye-fill" style="padding-right: 5px"></span> </a> </td>-->
+<!--    </tr>-->
+    </tbody>
+  </table>
+
+
+</div>

@@ -29,7 +29,7 @@ export class AdmingeneralbusquedacomponentComponent implements OnInit {
             }
           });
       }else{
-        this.router.navigate(['/admin-general',0,'cuentas'],
+        this.router.navigate(['/admin-general',GlobalDataService.administradorGeneral.idUsuario,'cuentas'],
           {
             queryParams:{
               nombre:valorBusqueda
@@ -37,7 +37,7 @@ export class AdmingeneralbusquedacomponentComponent implements OnInit {
           });
       }
     }else{
-      this.router.navigate(['/admin-general',0,'cuentas']);
+      this.router.navigate(['/admin-general',GlobalDataService.administradorGeneral.idUsuario,'cuentas']);
     }
   }
   botonNuevo(){

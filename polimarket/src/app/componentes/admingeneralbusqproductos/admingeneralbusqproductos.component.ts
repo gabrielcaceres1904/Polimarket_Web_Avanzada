@@ -5,6 +5,7 @@ import {ModalRegistrocuentaComponent} from "../modal-registrocuenta/modal-regist
 import {ModalRegistroproductoComponent} from "../modal-registroproducto/modal-registroproducto.component";
 import {CategoriaService} from "../../servicios/http/categoria.service";
 import {CategoriaInterface} from "../../servicios/interfaces/modelo/categoria.interface";
+import {GlobalDataService} from "../../servicios/global/global-data.service";
 
 @Component({
   selector: 'app-admingeneralbusqproductos',
@@ -51,7 +52,7 @@ export class AdmingeneralbusqproductosComponent implements OnInit {
     this.buscarProd = valor.value;
     console.log("buscar prod = ", this.buscarProd);
     if(this.buscarProd){
-      this.router.navigate(['/admin-general', 0,'productos'],
+      this.router.navigate(['/admin-general', GlobalDataService.administradorGeneral.idUsuario,'productos'],
         {
           queryParams: {
             nombreProducto: this.buscarProd//?name=david
@@ -59,7 +60,7 @@ export class AdmingeneralbusqproductosComponent implements OnInit {
         }
       );
     }else{
-      this.router.navigate(['/admin-general', 0,'productos']);
+      this.router.navigate(['/admin-general', GlobalDataService.administradorGeneral.idUsuario,'productos']);
     }
   }
   botonBuscar(){
