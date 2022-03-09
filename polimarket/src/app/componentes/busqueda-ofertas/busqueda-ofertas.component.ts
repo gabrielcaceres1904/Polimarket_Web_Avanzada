@@ -52,7 +52,7 @@ export class BusquedaOfertasComponent implements OnInit {
       .subscribe({
         next:(parametrosRuta) => {
           //console.log(parametrosRuta)
-          this.idUsuario = parametrosRuta['idCliente'];
+          this.idUsuario = parametrosRuta['idAdmin'];
           //console.log('Usuario Sidebar: ', this.idUsuario)
         }
       })
@@ -131,10 +131,6 @@ export class BusquedaOfertasComponent implements OnInit {
         }
       )
     }
-  }
-
-  botonNuevo() {
-
   }
 
   private buscarSucursales() {

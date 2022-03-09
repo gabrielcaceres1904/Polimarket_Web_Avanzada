@@ -1,4 +1,7 @@
 <div class="container">
+  <app-busqueda-sucursal-productos [idUsuario]="idUsuario" [sucursalSeleccionada]="sucursalAdmin.idSucursal"></app-busqueda-sucursal-productos>
+</div>
+<div class="container">
   <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -9,8 +12,27 @@
       <th scope="col">Actualizar</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="sinFiltro">
     <tr *ngFor="let producto of productosSucursal">
+      <td>
+        <div class="item-carrito">
+          <img src="{{prefix + producto.producto.codigo}}">
+          <span>{{producto.producto.nombre}}</span>
+        </div>
+      </td>
+      <td>${{producto.producto.precio}}</td>
+      <td>{{producto.producto.codigo}}</td>
+      <td>{{producto.stock}}</td>
+      <td>
+        <div class="col-md-12">
+          <input type="number" min="0" class="col-md-8" [(ngModel)]="producto.adicional">
+          <mat-icon class="col-md-4" (click)="actualizarStock(producto, producto.adicional)">refresh</mat-icon>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+    <tbody *ngIf="!sinFiltro">
+    <tr *ngFor="let producto of productosBusqueda">
       <td>
         <div class="item-carrito">
           <img src="{{prefix + producto.producto.codigo}}">

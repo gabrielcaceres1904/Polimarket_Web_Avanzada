@@ -23,6 +23,12 @@ export class RutaAdminProductosComponent implements OnInit {
   sucursalProductosAdmin: SucursalProductoInterface[] = []
   productosSucursal: ProductoAdminInterface[] = [];
 
+  //Busqueda
+  busqueda = ''
+  sinFiltro = true
+  categoriaSeleccionada = -1
+  productosBusqueda: ProductoAdminInterface[] = [];
+
 
   constructor(private readonly sucursalProductosService: SucursalProductoService,
               private readonly activatedRoute: ActivatedRoute,
@@ -40,8 +46,12 @@ export class RutaAdminProductosComponent implements OnInit {
           this.idUsuario = parametrosRuta['idAdmin'];
           this.buscarSucursal(this.idUsuario)
           //console.log('Usuario Sidebar: ', this.idUsuario)
+        },
+        complete: ()=> {
+
         }
       })
+
   }
 
   private buscarSucursal(idUsuario: number) {
@@ -158,6 +168,7 @@ export class RutaAdminProductosComponent implements OnInit {
                       cont++
                       if(cont === this.sucursalProductosAdmin.length){
                         this.productosSucursal = productos
+                        this.observersBusqueda()
                       }
                     }
                   }
@@ -166,5 +177,78 @@ export class RutaAdminProductosComponent implements OnInit {
           }
         }
       )
+  }
+
+  private buscarProductosCategoria(categoriaSeleccionada: number) {
+    let productosSeleccionados: ProductoAdminInterface[] = []
+    for(let producto of this.productosSucursal){
+      if(producto.producto.idCategoria === categoriaSeleccionada){
+        productosSeleccionados.push(producto)
+      }
+    }
+    this.productosBusqueda = productosSeleccionados
+  }
+
+  private buscarProductosParametro(categoriaSeleccionada: number) {
+    let productosSeleccionados: ProductoAdminInterface[] = []
+    for(let producto of this.productosSucursal){
+      if(producto.producto.idCategoria === categoriaSeleccionada && producto.producto.nombre.includes(this.busqueda)){
+        productosSeleccionados.push(producto)
+      }
+    }
+    this.productosBusqueda = productosSeleccionados
+  }
+
+  private buscarProductosNombre(categoriaSeleccionada: number) {
+    let productosSeleccionados: ProductoAdminInterface[] = []
+    for(let producto of this.productosSucursal){
+      if(producto.producto.nombre.includes(this.busqueda)){
+        productosSeleccionados.push(producto)
+      }
+    }
+    this.productosBusqueda = productosSeleccionados
+  }
+
+  private observersBusqueda() {
+    const parametrosConsulta$ = this.activatedRoute.queryParams;
+
+    parametrosConsulta$.subscribe(
+      {
+        next:(queryParams)=>{
+          //console.log(queryParams);
+          this.categoriaSeleccionada = Number.parseInt(queryParams['categoria'])
+          this.busqueda = queryParams['nombre']
+          console.log('Ruta-Admin Busqueda: ', this.busqueda)
+          console.log('Ruta-Admin Categoria: ', this.categoriaSeleccionada)
+
+          if(!isNaN(this.categoriaSeleccionada)){
+            if(this.busqueda != undefined){
+              //console.log('Caso 1')
+              this.buscarProductosParametro(this.categoriaSeleccionada)
+              this.sinFiltro = false
+            }else{
+              //console.log('Caso 2')
+              this.buscarProductosCategoria(this.categoriaSeleccionada)
+              this.sinFiltro = false
+            }
+          }else{
+            if(this.busqueda != undefined){
+              //console.log('Caso 3')
+              this.buscarProductosNombre(this.categoriaSeleccionada)
+              this.sinFiltro = false
+            }else{
+              //console.log('Caso 4')
+              this.sinFiltro = true
+            }
+          }
+        },
+        error: (error)=>{
+          console.error(error)
+        },
+        complete: ()=> {
+
+        }
+      }
+    )
   }
 }

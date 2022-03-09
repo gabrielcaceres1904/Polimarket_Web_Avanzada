@@ -1,1 +1,18 @@
-<p>busqueda-sucursal-productos works!</p>
+<div class="container-fluid py-3 col-md-12" style="background: #F6F7F8; margin: 10px 0px">
+  <form>
+    <div class="d-flex flex-row size-busqueda">
+      <div class="d-flex flex-row">
+        <label for="busquedaOferta" style="font-family: Poppins;padding-top: 15px;margin-right: 10px">Buscar</label>
+        <input class="form-control" type="text" placeholder="Ej.: Gelatina" aria-label="default input example" id="busquedaOferta">
+        <button class="btn btn-lg btn-primary rounded-0" type="button" (click)="botonBuscar()" style="font-family: Poppins;background: #40BFFF; border: 0;">Buscar</button>
+      </div>
+      <div class="d-flex flex-row" style="margin-left: 20px">
+        <label style="font-family: Poppins;padding-top: 15px;margin-right: 10px">Categoría</label>
+        <select class="btn btn-light browser-default custom-select col-md-12" (change)="busquedaCategoria($event)" style="background-color: white; height: 100%">
+          <option value="0"></option>
+          <option *ngFor="let categoria of categorias" value="{{categoria.idCategoria}}">{{categoria.nombre}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
