@@ -52,7 +52,7 @@ export class BusquedaOfertasComponent implements OnInit {
       .subscribe({
         next:(parametrosRuta) => {
           //console.log(parametrosRuta)
-          this.idUsuario = parametrosRuta['idAdmin'];
+          this.idUsuario = parametrosRuta['idCliente'];
           //console.log('Usuario Sidebar: ', this.idUsuario)
         }
       })
@@ -89,6 +89,7 @@ export class BusquedaOfertasComponent implements OnInit {
     let valorOferta = <HTMLInputElement> document.getElementById("busquedaOferta");
     valorOferta.value = ''
     const valor = Number.parseInt(event.target.value)
+    this.sucursalSeleccionada = valor
     //console.log(valor)
     if(valor != 0){
       this.sucursalService.buscarUno(valor)
@@ -111,7 +112,8 @@ export class BusquedaOfertasComponent implements OnInit {
   }
 
   navegarSucursal(sucursal:number){
-    if(this.categoriaSeleccionada != -1){
+    //console.log(sucursal, '-', this.categoriaSeleccionada, '-', this.idUsuario)
+    if(!isNaN(this.categoriaSeleccionada)){
       this.router.navigate(
         ['/cliente', this.idUsuario, 'home'],
         {
