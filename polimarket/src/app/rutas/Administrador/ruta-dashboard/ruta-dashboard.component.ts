@@ -25,7 +25,7 @@ export class RutaDashboardComponent implements OnInit {
       value: -1
     },
     {
-      titulo: 'Pedidos entregados',
+      titulo: 'Pedidos pendientes',
       icon: 'local_shipping',
       value: -1
     },
@@ -114,7 +114,7 @@ export class RutaDashboardComponent implements OnInit {
             const pedidos = datos as PedidoInterface[]
             let cont = 0
             for(let pedido of pedidos){
-              if(pedido.estado === 'Entregado'){
+              if(pedido.estado.trim() === 'Pendiente'){
                 cont++
                 pedidosEntregados.push(pedido.idPedido)
               }
